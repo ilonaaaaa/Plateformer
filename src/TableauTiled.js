@@ -27,10 +27,10 @@ class TableauTiled extends Tableau1 {
 
 
         // At last image must be loaded with its JSON
-        this.load.image('tiles', 'assets/tilesets/tilesheetFT.png');
+        this.load.image('tiles', 'asset/tilesets/tilesheetFT.png');
 
         // Load the export Tiled JSON
-        this.load.tilemapTiledJSON('map', 'assets/tilemaps/blockout.json');
+        this.load.tilemapTiledJSON('map', 'asset/tilemaps/blockout.json');
 
     }
 
