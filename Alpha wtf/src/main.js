@@ -1,23 +1,20 @@
 const config = {
     type: Phaser.AUTO,
     parent: 'game',
-    width: 5120,
-    heigth: 640,
+    width: 1920,
+    heigth: 1080,
     scale: {
         mode: Phaser.Scale.RESIZE,
-        autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: 5120,
-        heigth: 640
+        autoCenter: Phaser.Scale.CENTER_BOTH
     },
     physics: {
         default: 'arcade',
         arcade: {
             gravity: { y: 500 },
-            debug: false ,
+            debug: true,
         },
     },
-    scene: new TableauTiled()
+    scene: new scene(),
 };
 
 const game = new Phaser.Game(config);
-
