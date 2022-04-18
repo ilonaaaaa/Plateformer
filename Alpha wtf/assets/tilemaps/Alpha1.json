@@ -77,7 +77,7 @@
         {
          "columns":14,
          "firstgid":1,
-         "image":"..\/..\/..\/..\/..\/Desktop\/Tiled\/stackabuse-platformer\/assets\/tilesets\/platformPack_tilesheet.png",
+         "image":"..\/tilesets\/platformPack_tilesheet.png",
          "imageheight":448,
          "imagewidth":896,
          "margin":0,
