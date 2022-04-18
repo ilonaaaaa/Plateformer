@@ -11,12 +11,7 @@ class scene extends Phaser.Scene {
         this.load.tilemapTiledJSON('map', 'assets/tilemaps/Alpha1.json');
     }
 
-
     create() {
-
-
-
-
 
         const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0, 0);
         backgroundImage.setScale(1, 0.8);
@@ -33,7 +28,6 @@ class scene extends Phaser.Scene {
 
         this.cameras.main.startFollow(this.player.player,false);
     }
-
 
     update() {
 
