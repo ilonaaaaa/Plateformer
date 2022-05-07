@@ -34,7 +34,6 @@ class scene extends Phaser.Scene {
         switch (true) {
             case (this.cursors.space.isDown || this.cursors.up.isDown) && this.player.player.body.onFloor():
                 this.player.jump()
-                console.log("oui")
                 break;
             case this.cursors.left.isDown:
                 this.player.moveLeft()
