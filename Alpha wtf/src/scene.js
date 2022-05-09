@@ -9,6 +9,7 @@ class scene extends Phaser.Scene {
         this.load.image('tiles', 'assets/tilesets/tilesheetFT.png');
         this.load.image('nino', 'assets/images/nino646464.png');
         this.load.tilemapTiledJSON('map', 'assets/tilemaps/blockout.json');
+        this.load.image("yoyo", "yoyo.png");
     }
 
     create() {
@@ -37,14 +38,61 @@ class scene extends Phaser.Scene {
             this.physics.add.collider(colliders,this.player.player)
         })
 
+        this.yoyo = this.physics.add.sprite(this.player.x, this.player.y, "yoyo")
+        this.yoyo.setScale(2)
+        this.yoyo.setDepth(0);
+        this.yoyo.setDisplaySize(20, 20)
+        this.yoyo.launch = false;
+        this.yoyo.body.setAllowGravity(false)
+
+
         this.cursors = this.input.keyboard.createCursorKeys();
 
         this.cameras.main.startFollow(this.player.player,false, 0.15,0.10, -10, 196);
 
         this.player.initKeyboard();
+
+
+        this.input.on('pointerdown', function (pointer) {
+            if(this.yoyo.launch === false && Phaser.Math.Distance.Between(this.player.x, this.player.y, pointer.worldX, pointer.worldY) <= 200){
+
+                //this.drawLine()
+                this.input.keyboard.enabled = false;
+                this.yoyo.launch = true;
+                this.player.setVelocityX(0);
+                this.player.setVelocityY(0);
+                this.player.body.setAllowGravity(false)
+                this.player.body.setImmovable(true)
+                this.yoyoTween = this.tweens.add({
+                    targets: this.yoyo,
+                    x: pointer.worldX,
+                    y: pointer.worldY,
+                    duration: 300,
+                    ease: 'Power2',
+                    yoyo: true,
+                });
+            }
+        }, this);
+
+
     }
 
     update() {
         this.player.move();
+
+        if(!this.yoyo.launch){
+            this.yoyo.x = this.player.x;
+            this.yoyo.y = this.player.y;
+
+            if(this.yoyoTween.progress === 1){
+                this.input.keyboard.enabled = true;
+                //this.redraw()
+                this.yoyo.launch = false;
+                this.player.body.setAllowGravity(true)
+                this.player.body.setImmovable(false)
+            }
+
         }
+
+    }
 }
