@@ -54,7 +54,7 @@ class scene extends Phaser.Scene {
 
 
         this.input.on('pointerdown', function (pointer) {
-            if(this.yoyo.launch === false && Phaser.Math.Distance.Between(this.player.x, this.player.y, pointer.worldX, pointer.worldY) <= 200){
+            if(this.yoyo.launch === false && Phaser.Math.Distance.Between(this.player.x, this.player.y, pointer.worldX, pointer.worldY) <= 1000){
 
                 //this.drawLine()
                 this.input.keyboard.enabled = false;
@@ -78,21 +78,18 @@ class scene extends Phaser.Scene {
     }
 
     update() {
-        this.player.move();
 
-        if(!this.yoyo.launch){
+        if (!this.yoyo.launch) {
             this.yoyo.x = this.player.x;
             this.yoyo.y = this.player.y;
-
-            if(this.yoyoTween.progress === 1){
+        }
+        else {
+            //this.drawLine()
+            if (this.yoyoTween.progress === 1) {
                 this.input.keyboard.enabled = true;
                 //this.redraw()
                 this.yoyo.launch = false;
-                this.player.body.setAllowGravity(true)
-                this.player.body.setImmovable(false)
             }
-
         }
-
     }
 }
