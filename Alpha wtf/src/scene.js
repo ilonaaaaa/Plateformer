@@ -9,7 +9,7 @@ class scene extends Phaser.Scene {
         this.load.image('tiles', 'assets/tilesets/tilesheetFT.png');
         this.load.image('nino', 'assets/images/nino646464.png');
         this.load.tilemapTiledJSON('map', 'assets/tilemaps/blockout.json');
-        this.load.image("yoyo", "yoyo.png");
+        this.load.image("yoyo", "assets/images/yoyo.png");
     }
 
     create() {
@@ -79,6 +79,8 @@ class scene extends Phaser.Scene {
 
     update() {
 
+        this.player.move();
+
         if (!this.yoyo.launch) {
             this.yoyo.x = this.player.x;
             this.yoyo.y = this.player.y;
@@ -91,5 +93,6 @@ class scene extends Phaser.Scene {
                 this.yoyo.launch = false;
             }
         }
+        console.log(this.yoyo.launch)
     }
 }
