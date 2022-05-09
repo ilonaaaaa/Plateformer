@@ -7,7 +7,7 @@ class Player {
         this.player = this.scene.physics.add.sprite(50, 300, 'player');
         this.player.setBounce(0);
         this.player.setCollideWorldBounds(false);
-        this.scene.physics.add.collider(this.player, this.scene.platforms);
+        this.scene.physics.add.collider(this.player, this.scene.platform);
 
         this.scene.anims.create({
             key: 'walk',
