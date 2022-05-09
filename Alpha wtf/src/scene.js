@@ -27,27 +27,10 @@ class scene extends Phaser.Scene {
         this.player = new Player(this)
 
         this.cameras.main.startFollow(this.player.player,false);
+        this.player.initKeyboard();
     }
 
     update() {
-
-        switch (true) {
-            case (this.cursors.space.isDown || this.cursors.up.isDown) && this.player.player.body.onFloor():
-                this.player.jump()
-                break;
-            case this.cursors.left.isDown:
-                this.player.moveLeft()
-                break;
-            case this.cursors.right.isDown:
-                this.player.moveRight();
-                break;
-            default:
-                this.player.stop();
+        this.player.move();
         }
-
-
-
-
-
-    }
 }
