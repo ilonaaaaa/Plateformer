@@ -39,7 +39,8 @@ class scene extends Phaser.Scene {
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
-        this.cameras.main.startFollow(this.player.player,false);
+        this.cameras.main.startFollow(this.player.player,false, 0.15,0.10, -10, 196);
+
         this.player.initKeyboard();
     }
 
