@@ -4,34 +4,11 @@ class Player {
     constructor(scene) {
         this.scene=scene
         this.cameras=scene
-        this.player = this.scene.physics.add.sprite(190, 6080, 'player');
+        this.player = this.scene.physics.add.sprite(190, 6080, 'nino');
         this.player.setBounce(0);
         this.player.setCollideWorldBounds(false);
         this.scene.physics.add.collider(this.player, this.scene.platform);
 
-        this.scene.anims.create({
-            key: 'walk',
-            frames: this.scene.anims.generateFrameNames('player', {
-                prefix: 'robo_player_',
-                start: 2,
-                end: 3,
-            }),
-            frameRate: 10,
-            repeat: -1
-        });
-        this.scene.anims.create({
-            key: 'idle',
-            frames: [{key: 'player', frame: 'robo_player_0'}],
-            frameRate: 10,
-
-        });
-        this.scene.anims.create({
-            key: 'jump',
-            frames: [{key: 'player', frame: 'robo_player_1'}],
-            frameRate: 10,
-            repeat:-1,
-
-        });
     }
 
     jump(){
@@ -40,7 +17,7 @@ class Player {
         else{
             this.pokemon = true
             if(this.player.body.onFloor()){
-                this.player.setVelocityY(-600)
+                this.player.setVelocityY(-700)
                 this.player.play('jump',true)
                 this.saut =1 ;
             }
