@@ -5,11 +5,11 @@ class scene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.atlas('player', 'assets/images/kenney_player.png', 'assets/images/kenney_player_atlas.json');
-        this.load.image('tiles', 'assets/tilesets/tilesheetFT.png');
-        this.load.image('nino', 'assets/images/nino646464.png');
-        this.load.tilemapTiledJSON('map', 'assets/tilemaps/blockout.json');
-        this.load.image("yoyo", "assets/images/yoyo.png");
+        this.load.atlas('player', 'Alpha wtf/assets/images/kenney_player.png', 'assets/images/kenney_player_atlas.json');
+        this.load.image('tiles', 'Alpha wtf/assets/tilesets/tilesheetFT.png');
+        this.load.image('nino', 'Alpha wtf/assets/images/nino646464.png');
+        this.load.tilemapTiledJSON('map', 'Alpha wtf/assets/tilemaps/blockout.json');
+        this.load.image("yoyo", "Alpha wtf/assets/images/yoyo.png");
     }
 
     create() {
@@ -27,11 +27,11 @@ class scene extends Phaser.Scene {
             immovable: true
         });
         const colliderLayer = this.map.getObjectLayer('colliders')
-        colliderLayer.objects.forEach(objData=> {
-            const {x = 0, y = 0, width = 0, height = 0} = objData
-            let colliders = this.add.rectangle(x, y, width, height).setOrigin(0, 0)
-            if(objData.name==='stick') {
-                colliders.name=objData.name
+        colliderLayer.objects.forEach(colliders=> {
+            const {x = 0, y = 0, width = 0, height = 0} = colliders
+            var colliders = this.add.rectangle(x, y, width, height).setOrigin(0, 0)
+            if(colliders.name==='stick') {
+                colliders.name=colliders.name
             };
             colliders = this.physics.add.existing(colliders)
             this.colliders.add(colliders)
