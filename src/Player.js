@@ -48,11 +48,11 @@ class Player {
     }
 
     move(){
-        if(this.qDown && this.zDown ){
+        if(this.qDown && this.spaceDown ){
             this.jump();
             return;
         }
-        if(this.dDown && this.zDown ){
+        if(this.dDown && this.spaceDown ){
             this.jump();
             return;
         }
@@ -63,7 +63,7 @@ class Player {
             case this.dDown:
                 this.moveRight();
                 break;
-            case this.zDown :
+            case this.spaceDown :
                 this.jump();
                 break;
             case this.player.body.onFloor():
@@ -76,8 +76,8 @@ class Player {
         let me = this;
         this.scene.input.keyboard.on('keydown', function (kevent) {
             switch (kevent.keyCode) {
-                case Phaser.Input.Keyboard.KeyCodes.Z:
-                    me.zDown=true;
+                case Phaser.Input.Keyboard.KeyCodes.SPACE:
+                    me.spaceDown=true;
                     break;
                 case Phaser.Input.Keyboard.KeyCodes.Q:
                     me.qDown=true;
@@ -85,15 +85,12 @@ class Player {
                 case Phaser.Input.Keyboard.KeyCodes.D:
                     me.dDown=true;
                     break;
-                case Phaser.Input.Keyboard.KeyCodes.SPACE:
-                    me.spaceDown=true;
-                    break;
             }
         });
         this.scene.input.keyboard.on('keyup', function (kevent) {
             switch (kevent.keyCode) {
-                case Phaser.Input.Keyboard.KeyCodes.Z:
-                    me.zDown=false;
+                case Phaser.Input.Keyboard.KeyCodes.SPACE:
+                    me.spaceDown=false;
                     me.pokemon=false;
                     break;
                 case Phaser.Input.Keyboard.KeyCodes.Q:
@@ -101,9 +98,6 @@ class Player {
                     break;
                 case Phaser.Input.Keyboard.KeyCodes.D:
                     me.dDown=false;
-                    break;
-                case Phaser.Input.Keyboard.KeyCodes.SPACE:
-                    me.spaceDown=false;
                     break;
             }
         });
