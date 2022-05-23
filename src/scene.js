@@ -22,6 +22,38 @@ class scene extends Phaser.Scene {
         this.sol = this.map.createLayer('decor2', this.tileset, 0, 0);
         this.shiny = this.map.createLayer('shiny', this.tileset, 0, 0);
 
+        /*this.collidersC = this.physics.add.group({
+            allowGravity: false,
+            immovable: true
+        });
+        const colliderCLayer = this.map.getObjectLayer('colliders cassable')
+        colliderCLayer.objects.forEach(collidersC=> {
+            const {x = 0, y = 0, width = 0, height = 0} = collidersC
+            var collidersC = this.add.rectangle(x, y, width, height).setOrigin(0, 0)
+            if(collidersC.name==='stick') {
+                collidersC.name=collidersC.name
+            };
+            collidersC = this.physics.add.existing(collidersC)
+            this.collidersC.add(collidersC)
+            this.physics.add.collider(collidersC,this.player.player)
+        })*/
+
+        this.collidersS = this.physics.add.group({
+            allowGravity: false,
+            immovable: true
+        });
+        const colliderSLayer = this.map.getObjectLayer('colliders shiny')
+        colliderSLayer.objects.forEach(collidersS=> {
+            const {x = 0, y = 0, width = 0, height = 0} = collidersS
+            var collidersS = this.add.rectangle(x, y, width, height).setOrigin(0, 0)
+            if(collidersS.name==='stick') {
+                collidersS.name=collidersS.name
+            };
+            collidersS = this.physics.add.existing(collidersS)
+            this.collidersS.add(collidersS)
+            this.physics.add.collider(collidersS,this.player.player)
+        })
+
         this.colliders = this.physics.add.group({
             allowGravity: false,
             immovable: true
