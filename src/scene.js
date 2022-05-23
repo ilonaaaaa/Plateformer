@@ -22,6 +22,8 @@ class scene extends Phaser.Scene {
         this.sol = this.map.createLayer('decor2', this.tileset, 0, 0);
         this.shiny = this.map.createLayer('shiny', this.tileset, 0, 0);
 
+        //this.worldSwitch
+
         /*this.collidersC = this.physics.add.group({
             allowGravity: false,
             immovable: true

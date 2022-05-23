@@ -11,11 +11,6 @@ class Player {
 
     }
 
-
-    worldSwitch(){
-
-    }
-
     jump(){
         if(this.pokemon){
         }
@@ -79,11 +74,11 @@ class Player {
 
     switch(){
         if(this.qDown && this.spaceDown ){
-            //this.jump();
+            this.worldSwitch();
             return;
         }
         if(this.dDown && this.spaceDown ){
-            //this.jump();
+            this.worldSwitch();
             return;
         }
     }
