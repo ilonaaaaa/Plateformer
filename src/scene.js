@@ -97,7 +97,7 @@ class scene extends Phaser.Scene {
                 me.player.player.setVelocityX(0);
                 me.player.player.setVelocityY(0);
                 me.player.player.body.setAllowGravity(false)
-                me.player.player.setImmovable(true)
+                me.player.player.setImmovable(false)
                 me.yoyoTween = me.tweens.add({
                     targets: me.yoyo,
                     x: pointer.worldX,
