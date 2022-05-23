@@ -20,9 +20,8 @@ class scene extends Phaser.Scene {
         this.player = new Player(this)
 
         this.sol = this.map.createLayer('decor2', this.tileset, 0, 0);
-        this.shiny = this.map.createLayer('shiny', this.tileset, 0, 0);
+        this.shiny = this.map.createLayer('shiny', this.tileset, 0, 0).setVisible(false);
 
-        //this.worldSwitch
 
         /*this.collidersC = this.physics.add.group({
             allowGravity: false,
@@ -82,23 +81,28 @@ class scene extends Phaser.Scene {
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
+
+
+
         this.cameras.main.startFollow(this.player.player,false, 0.15,0.10, -10, 196);
 
         this.player.initKeyboard();
 
+        let me = this
 
         this.input.on('pointerdown', function (pointer) {
-            if(this.yoyo.launch === false && Phaser.Math.Distance.Between(this.player.x, this.player.y, pointer.worldX, pointer.worldY) <= 1000){
 
+            if(this.yoyo.launch === false  && Phaser.Math.Distance.Between(me.player.player.x, me.player.player.y, pointer.worldX, pointer.worldY) <= 500){
+                console.log("lol")
                 //this.drawLine()
-                this.input.keyboard.enabled = false;
-                this.yoyo.launch = true;
-                this.player.setVelocityX(0);
-                this.player.setVelocityY(0);
-                this.player.body.setAllowGravity(false)
-                this.player.body.setImmovable(true)
-                this.yoyoTween = this.tweens.add({
-                    targets: this.yoyo,
+                me.input.keyboard.enabled = false;
+                me.yoyo.launch = true;
+                me.player.player.setVelocityX(0);
+                me.player.player.setVelocityY(0);
+                me.player.player.body.setAllowGravity(false)
+                me.player.player.setImmovable(true)
+                me.yoyoTween = me.tweens.add({
+                    targets: me.yoyo,
                     x: pointer.worldX,
                     y: pointer.worldY,
                     duration: 300,
@@ -109,6 +113,23 @@ class scene extends Phaser.Scene {
         }, this);
 
 
+        this.initKeyboard();
+    }
+
+    initKeyboard(){
+        let me = this;
+        this.input.keyboard.on('keydown', function (kevent) {
+            switch (kevent.keyCode) {
+                case Phaser.Input.Keyboard.KeyCodes.E:
+                    me.shiny.visible = false;
+                    me.collidersS.body.disable = true;
+                    break;
+                case Phaser.Input.Keyboard.KeyCodes.F:
+                    me.shiny.visible = true;
+                    me.collidersS.body.enable = true;
+                    break;
+            }
+        });
     }
 
     update() {
@@ -116,17 +137,17 @@ class scene extends Phaser.Scene {
         this.player.move();
 
         if (!this.yoyo.launch) {
-            this.yoyo.x = this.player.x;
-            this.yoyo.y = this.player.y;
+            this.yoyo.x = this.player.player.x;
+            this.yoyo.y = this.player.player.y;
         }
         else {
-            //this.drawLine()
             if (this.yoyoTween.progress === 1) {
                 this.input.keyboard.enabled = true;
-                //this.redraw()
                 this.yoyo.launch = false;
+                this.player.player.body.setAllowGravity(true)
+                this.player.player.setImmovable(false)
             }
         }
-        console.log(this.yoyo.launch)
+        //console.log(this.yoyo.launch)
     }
 }

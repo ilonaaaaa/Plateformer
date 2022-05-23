@@ -72,17 +72,6 @@ class Player {
         }
     }
 
-    switch(){
-        if(this.qDown && this.spaceDown ){
-            this.worldSwitch();
-            return;
-        }
-        if(this.dDown && this.spaceDown ){
-            this.worldSwitch();
-            return;
-        }
-    }
-
 
     initKeyboard() {
         let me = this;
@@ -97,9 +86,6 @@ class Player {
                 case Phaser.Input.Keyboard.KeyCodes.D:
                     me.dDown=true;
                     break;
-                    case Phaser.Input.Keyboard.KeyCodes.E:
-                    me.eDown=true;
-                    break;
             }
         });
         this.scene.input.keyboard.on('keyup', function (kevent) {
@@ -113,9 +99,6 @@ class Player {
                     break;
                 case Phaser.Input.Keyboard.KeyCodes.D:
                     me.dDown=false;
-                    break;
-                    case Phaser.Input.Keyboard.KeyCodes.E:
-                    me.eDown=false;
                     break;
             }
         });
