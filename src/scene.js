@@ -31,15 +31,13 @@ class scene extends Phaser.Scene {
         colliderCLayer.objects.forEach(collidersC=> {
             const {x = 0, y = 0, width = 0, height = 0} = collidersC
             var collidersC = this.add.rectangle(x, y, width, height).setOrigin(0, 0)
-            if(collidersC.name==='stick') {
-                collidersC.name=collidersC.name
-            };
             collidersC = this.physics.add.existing(collidersC)
             this.collidersC.add(collidersC)
             this.physics.add.collider(collidersC,this.player.player)
         })*/
 
-        //
+
+        //RENOMMER LES VARIABLES
         this.plateformes = this.physics.add.group({
             allowGravity: false,
             immovable: true
@@ -53,7 +51,6 @@ class scene extends Phaser.Scene {
 
 
 
-
         this.colliders = this.physics.add.group({
             allowGravity: false,
             immovable: true
@@ -62,58 +59,20 @@ class scene extends Phaser.Scene {
         colliderLayer.objects.forEach(colliders=> {
             const {x = 0, y = 0, width = 0, height = 0} = colliders
             var colliders = this.add.rectangle(x, y, width, height).setOrigin(0, 0)
-
             colliders = this.physics.add.existing(colliders)
             this.colliders.add(colliders)
             this.physics.add.collider(colliders,this.player.player)
         })
 
-        this.yoyo = this.physics.add.sprite(this.player.x, this.player.y, "yoyo")
-        this.yoyo.setScale(2)
-        this.yoyo.setDepth(0);
-        this.yoyo.setDisplaySize(20, 20)
-        this.yoyo.launch = false;
-        this.yoyo.body.setAllowGravity(false)
-
-
-        this.cursors = this.input.keyboard.createCursorKeys();
-
-
-
-
         this.cameras.main.startFollow(this.player.player,false, 0.15,0.10, -10, 196);
 
-        this.player.initKeyboard();
 
-        let me = this
+        //OK, commenter le code et mettre yoyo dans player
 
-        this.input.on('pointerdown', function (pointer) {
-
-            if(this.yoyo.launch === false  && Phaser.Math.Distance.Between(me.player.player.x, me.player.player.y, pointer.worldX, pointer.worldY) <= 700){
-                console.log("lol")
-                //this.drawLine()
-                me.input.keyboard.enabled = false;
-                me.yoyo.launch = true;
-                me.player.player.setVelocityX(0);
-                me.player.player.setVelocityY(0);
-                me.player.player.body.setAllowGravity(false)
-                me.player.player.setImmovable(false)
-                me.yoyoTween = me.tweens.add({
-                    targets: me.yoyo,
-                    x: pointer.worldX,
-                    y: pointer.worldY,
-                    duration: 300,
-                    ease: 'Power2',
-                    yoyo: true,
-                });
-            }
-        }, this);
 
 
         this.initKeyboard();
         this.masquerTrucs(true)
-
-
 
     }
 
@@ -151,20 +110,8 @@ class scene extends Phaser.Scene {
 
     update() {
 
+        this.player.update();
         this.player.move();
 
-        if (!this.yoyo.launch) {
-            this.yoyo.x = this.player.player.x;
-            this.yoyo.y = this.player.player.y;
-        }
-        else {
-            if (this.yoyoTween.progress === 1) {
-                this.input.keyboard.enabled = true;
-                this.yoyo.launch = false;
-                this.player.player.body.setAllowGravity(true)
-                this.player.player.setImmovable(false)
-            }
-        }
-        //console.log(this.yoyo.launch)
     }
 }

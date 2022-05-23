@@ -9,7 +9,42 @@ class Player {
         this.player.setCollideWorldBounds(false);
         this.scene.physics.add.collider(this.player, this.scene.platform);
 
+
+        this.yoyo = this.scene.physics.add.sprite(this.player.x, this.player.y, "yoyo")
+        this.yoyo.setScale(2)
+        this.yoyo.setDepth(0);
+        this.yoyo.setDisplaySize(20, 20)
+        this.yoyo.launch = false;
+        this.yoyo.body.setAllowGravity(false)
+
+        this.initKeyboard();
+        this.cursors = this.scene.input.keyboard.createCursorKeys();
+        let me = this
+        this.scene.input.on('pointerdown', function (pointer) {
+
+            if(this.yoyo.launch === false  && Phaser.Math.Distance.Between(me.player.x, me.player.y, pointer.worldX, pointer.worldY) <= 700){
+                console.log("lol")
+                //this.drawLine()
+                me.scene.input.keyboard.enabled = false;
+                me.yoyo.launch = true;
+                me.player.setVelocityX(0);
+                me.player.setVelocityY(0);
+                me.player.body.setAllowGravity(false)
+                me.player.setImmovable(false)
+                me.yoyoTween = me.scene.tweens.add({
+                    targets: me.yoyo,
+                    x: pointer.worldX,
+                    y: pointer.worldY,
+                    duration: 300,
+                    ease: 'Power2',
+                    yoyo: true,
+                });
+            }
+        }, this);
+
     }
+
+
 
     jump(){
         if(this.pokemon){
@@ -42,10 +77,11 @@ class Player {
     }
     stop(){
         this.player.setVelocityX(0);
-        if (this.player.body.onFloor()) {
-            this.player.play('idle',true)
-        }
+        // if (this.player.body.onFloor()) {
+        //     this.player.play('idle',true)
+        // }
     }
+
 
     move(){
         if(this.qDown && this.spaceDown ){
@@ -71,7 +107,7 @@ class Player {
                 break;
         }
     }
-
+//changer le ONFLOOR, pour une fonction que met le jump à 0, toucher le collider du sol remet le jump a 0
 
     initKeyboard() {
         let me = this;
@@ -103,6 +139,24 @@ class Player {
             }
         });
     }
+
+    update(){
+        if (!this.yoyo.launch) {
+            this.move();
+            this.yoyo.x = this.player.x;
+            this.yoyo.y = this.player.y;
+        }
+        else {
+            this.move();
+            if (this.yoyoTween.progress === 1) {
+                this.scene.input.keyboard.enabled = true;
+                this.yoyo.launch = false;
+
+            }
+        }
+        //console.log(this.yoyo.launch)
+    }
+
     }
 
 
