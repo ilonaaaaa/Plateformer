@@ -39,21 +39,20 @@ class scene extends Phaser.Scene {
             this.physics.add.collider(collidersC,this.player.player)
         })*/
 
-        this.collidersS = this.physics.add.group({
+        //
+        this.plateformes = this.physics.add.group({
             allowGravity: false,
             immovable: true
         });
         const colliderSLayer = this.map.getObjectLayer('colliders shiny')
-        colliderSLayer.objects.forEach(collidersS=> {
-            const {x = 0, y = 0, width = 0, height = 0} = collidersS
-            var collidersS = this.add.rectangle(x, y, width, height).setOrigin(0, 0)
-            if(collidersS.name==='stick') {
-                collidersS.name=collidersS.name
-            };
-            collidersS = this.physics.add.existing(collidersS)
-            this.collidersS.add(collidersS)
-            this.physics.add.collider(collidersS,this.player.player)
-        })
+        colliderSLayer.objects.forEach(item=> {
+            let collider = this.add.rectangle(item.x, item.y, item.width, item.height).setOrigin(0, 0)
+            this.plateformes.add(collider)
+            this.physics.add.collider(collider,this.player.player);
+        });
+
+
+
 
         this.colliders = this.physics.add.group({
             allowGravity: false,
@@ -63,9 +62,7 @@ class scene extends Phaser.Scene {
         colliderLayer.objects.forEach(colliders=> {
             const {x = 0, y = 0, width = 0, height = 0} = colliders
             var colliders = this.add.rectangle(x, y, width, height).setOrigin(0, 0)
-            if(colliders.name==='stick') {
-                colliders.name=colliders.name
-            };
+
             colliders = this.physics.add.existing(colliders)
             this.colliders.add(colliders)
             this.physics.add.collider(colliders,this.player.player)
@@ -92,7 +89,7 @@ class scene extends Phaser.Scene {
 
         this.input.on('pointerdown', function (pointer) {
 
-            if(this.yoyo.launch === false  && Phaser.Math.Distance.Between(me.player.player.x, me.player.player.y, pointer.worldX, pointer.worldY) <= 500){
+            if(this.yoyo.launch === false  && Phaser.Math.Distance.Between(me.player.player.x, me.player.player.y, pointer.worldX, pointer.worldY) <= 700){
                 console.log("lol")
                 //this.drawLine()
                 me.input.keyboard.enabled = false;
@@ -114,19 +111,39 @@ class scene extends Phaser.Scene {
 
 
         this.initKeyboard();
+        this.masquerTrucs(true)
+
+
+
     }
+
+    masquerTrucs(masquer=false){
+        if(masquer){
+            this.shiny.visible = false;
+            this.plateformes.getChildren().forEach(child=>{
+                child.body.enable=false;
+            });
+        }
+        else{
+            this.shiny.visible = true;
+            this.plateformes.getChildren().forEach(child=>{
+                this.plateformes.getChildren().forEach(child=>{
+                    child.body.enable=true;
+                });
+            })
+        }
+    }
+
 
     initKeyboard(){
         let me = this;
         this.input.keyboard.on('keydown', function (kevent) {
             switch (kevent.keyCode) {
                 case Phaser.Input.Keyboard.KeyCodes.E:
-                    me.shiny.visible = false;
-                    me.collidersS.body.disable = true;
+                    me.masquerTrucs(true)
                     break;
                 case Phaser.Input.Keyboard.KeyCodes.F:
-                    me.shiny.visible = true;
-                    me.collidersS.body.enable = true;
+                    me.masquerTrucs(false)
                     break;
             }
         });
