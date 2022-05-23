@@ -11,6 +11,11 @@ class Player {
 
     }
 
+
+    worldSwitch(){
+
+    }
+
     jump(){
         if(this.pokemon){
         }
@@ -72,6 +77,18 @@ class Player {
         }
     }
 
+    switch(){
+        if(this.qDown && this.spaceDown ){
+            //this.jump();
+            return;
+        }
+        if(this.dDown && this.spaceDown ){
+            //this.jump();
+            return;
+        }
+    }
+
+
     initKeyboard() {
         let me = this;
         this.scene.input.keyboard.on('keydown', function (kevent) {
@@ -84,6 +101,9 @@ class Player {
                     break;
                 case Phaser.Input.Keyboard.KeyCodes.D:
                     me.dDown=true;
+                    break;
+                    case Phaser.Input.Keyboard.KeyCodes.E:
+                    me.eDown=true;
                     break;
             }
         });
@@ -98,6 +118,9 @@ class Player {
                     break;
                 case Phaser.Input.Keyboard.KeyCodes.D:
                     me.dDown=false;
+                    break;
+                    case Phaser.Input.Keyboard.KeyCodes.E:
+                    me.eDown=false;
                     break;
             }
         });
