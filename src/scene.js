@@ -12,6 +12,7 @@ class scene extends Phaser.Scene {
         this.load.image('nino', 'assets/images/nino646464.png');
         this.load.tilemapTiledJSON('map', 'assets/tilemaps/blockout.json');
         this.load.image("yoyo", "assets/images/yoyo.png");
+        this.load.atlas('run','assets/anim/run.png','assets/anim/run.json');
     }
 
     create() {

@@ -9,7 +9,7 @@ class Player {
         this.player.setCollideWorldBounds(false);
         this.scene.physics.add.collider(this.player, this.scene.platform);
 
-
+        this.animation()
         this.yoyo = this.scene.physics.add.sprite(this.player.x, this.player.y, "yoyo")
         this.yoyo.setScale(2)
         this.yoyo.setDepth(0);
@@ -44,6 +44,18 @@ class Player {
 
     }
 
+    animation(){
+
+        this.scene.anims.create({
+            key: 'run',
+            frameRate: 12,
+            frames: this.scene.anims.generateFrameNames('run', {prefix: 'run/run_',start:1,end:16, suffix:'.png'}),
+            repeat:-1
+
+
+
+        })
+    }
 
 
     jump(){
@@ -67,12 +79,12 @@ class Player {
         this.player.setVelocityX(300);
         this.player.setFlipX(false);
         if (this.player.body.onFloor()) {
-            this.player.play('walk', true)}
+            this.player.play('run', true)}
     }
     moveLeft(){
         this.player.setVelocityX(-300);
         if (this.player.body.onFloor()) {
-            this.player.play('walk', true)}
+            this.player.play('run', true)}
         this.player.setFlipX(true);
     }
     stop(){
@@ -94,6 +106,7 @@ class Player {
         }
         switch (true) {
             case this.qDown:
+
                 this.moveLeft();
                 break;
             case this.dDown:
