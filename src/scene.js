@@ -7,6 +7,8 @@ class scene extends Phaser.Scene {
     preload() {
         this.load.atlas('player', 'assets/images/kenney_player.png', 'assets/images/kenney_player_atlas.json');
         this.load.image('tiles', 'assets/tilesets/tilesheetFT.png');
+        this.load.image('ciel', 'assets/images/ciel.png');
+        this.load.image('cial', 'assets/images/cial.png');
         this.load.image('nino', 'assets/images/nino646464.png');
         this.load.tilemapTiledJSON('map', 'assets/tilemaps/blockout.json');
         this.load.image("yoyo", "assets/images/yoyo.png");
@@ -16,7 +18,8 @@ class scene extends Phaser.Scene {
 
         this.map = this.make.tilemap({ key: 'map' });
         this.tileset = this.map.addTilesetImage('tilesheetFT', 'tiles');
-
+        this.bg = this.add.sprite(0,0, 'ciel').setOrigin(0,0);
+        this.bg2 = this.add.sprite(0,0, 'cial').setOrigin(0,0).setVisible(false);
         this.player = new Player(this)
 
         this.sol = this.map.createLayer('decor2', this.tileset, 0, 0);
@@ -79,12 +82,14 @@ class scene extends Phaser.Scene {
     masquerTrucs(masquer=false){
         if(masquer){
             this.shiny.visible = false;
+            this.bg2.visible = false;
             this.plateformes.getChildren().forEach(child=>{
                 child.body.enable=false;
             });
         }
         else{
             this.shiny.visible = true;
+            this.bg2.visible = true;
             this.plateformes.getChildren().forEach(child=>{
                 this.plateformes.getChildren().forEach(child=>{
                     child.body.enable=true;

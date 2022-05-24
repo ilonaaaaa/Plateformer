@@ -29,7 +29,7 @@ class Player {
                 me.yoyo.launch = true;
                 me.player.setVelocityX(0);
                 me.player.setVelocityY(0);
-                me.player.body.setAllowGravity(false)
+                //me.player.body.setAllowGravity(false)
                 me.player.setImmovable(false)
                 me.yoyoTween = me.scene.tweens.add({
                     targets: me.yoyo,
