@@ -7,6 +7,7 @@ class scene extends Phaser.Scene {
     preload() {
         this.load.atlas('player', 'assets/images/kenney_player.png', 'assets/images/kenney_player_atlas.json');
         this.load.image('tiles', 'assets/tilesets/tilesheetPS2.png');
+        this.load.image('tile', 'assets/tilesets/tilesheetFT.png');
         this.load.image('ciel', 'assets/images/ciel.png');
         this.load.image('cial', 'assets/images/cial.png');
         this.load.image('nino', 'assets/images/nino646464.png');
@@ -18,13 +19,13 @@ class scene extends Phaser.Scene {
     create() {
 
         this.map = this.make.tilemap({ key: 'map' });
-        this.tileset = this.map.addTilesetImage('tilesheetFT', 'tiles');
+        this.tileset = this.map.addTilesetImage('tilesheetPS2', 'tiles');
         this.bg = this.add.sprite(0,0, 'ciel').setOrigin(0,0);
         this.bg2 = this.add.sprite(0,0, 'cial').setOrigin(0,0).setVisible(false);
-        this.player = new Player(this)
 
         this.sol = this.map.createLayer('decor2', this.tileset, 0, 0);
         this.shiny = this.map.createLayer('shiny', this.tileset, 0, 0).setVisible(false);
+        this.player = new Player(this)
 
 
         /*this.collidersC = this.physics.add.group({
