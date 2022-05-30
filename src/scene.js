@@ -13,6 +13,7 @@ class scene extends Phaser.Scene {
         this.load.image('nino', 'assets/images/nino646464.png');
         this.load.tilemapTiledJSON('map', 'assets/tilemaps/blockout.json');
         this.load.image("yoyo", "assets/images/yoyo.png");
+        this.load.image("fragment", "assets/images/fragment.png");
         this.load.atlas('run','assets/anim/run.png','assets/anim/run.json');
     }
 
@@ -25,6 +26,7 @@ class scene extends Phaser.Scene {
 
         this.sol = this.map.createLayer('decor2', this.tileset, 0, 0);
         this.shiny = this.map.createLayer('shiny', this.tileset, 0, 0).setVisible(false);
+        //this.fragmentlayer = this.map.getObjectLayer('fragment')['objects'];
         this.player = new Player(this)
 
 
@@ -47,8 +49,8 @@ class scene extends Phaser.Scene {
             allowGravity: false,
             immovable: true
         });
-        const colliderSLayer = this.map.getObjectLayer('colliders shiny')
-        colliderSLayer.objects.forEach(item=> {
+        const colliderShinyLayer = this.map.getObjectLayer('colliders shiny')
+        colliderShinyLayer.objects.forEach(item=> {
             let collider = this.add.rectangle(item.x, item.y, item.width, item.height).setOrigin(0, 0)
             this.plateformes.add(collider)
             this.physics.add.collider(collider,this.player.player);
@@ -56,25 +58,22 @@ class scene extends Phaser.Scene {
 
 
 
-        this.colliders = this.physics.add.group({
+        this.colliderSol = this.physics.add.group({
             allowGravity: false,
             immovable: true
         });
-        const colliderLayer = this.map.getObjectLayer('colliders')
-        colliderLayer.objects.forEach(colliders=> {
-            const {x = 0, y = 0, width = 0, height = 0} = colliders
-            var colliders = this.add.rectangle(x, y, width, height).setOrigin(0, 0)
-            colliders = this.physics.add.existing(colliders)
-            this.colliders.add(colliders)
+        const colliderSolLayer = this.map.getObjectLayer('colliders')
+        colliderSolLayer.objects.forEach(item=> {
+            let colliders = this.add.rectangle(item.x, item.y, item.width, item.height).setOrigin(0, 0)
+            this.colliderSol.add(colliders)
             this.physics.add.collider(colliders,this.player.player)
         })
+
 
         this.cameras.main.startFollow(this.player.player,false, 0.15,0.10, -10, 196);
 
 
         //OK, commenter le code et mettre yoyo dans player
-
-
 
         this.initKeyboard();
         this.masquerTrucs(true)
