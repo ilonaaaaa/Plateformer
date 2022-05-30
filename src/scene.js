@@ -18,7 +18,7 @@ class scene extends Phaser.Scene {
     create() {
 
         this.map = this.make.tilemap({ key: 'map' });
-        this.tileset = this.map.addTilesetImage('tilesheetFT', 'tiles');
+        this.tileset = this.map.addTilesetImage('tilesheetPS2', 'tiles');
         this.bg = this.add.sprite(0,0, 'ciel').setOrigin(0,0);
         this.bg2 = this.add.sprite(0,0, 'cial').setOrigin(0,0).setVisible(false);
 
