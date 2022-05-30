@@ -30,21 +30,18 @@ class scene extends Phaser.Scene {
         this.player = new Player(this)
 
 
-        /*this.collidersC = this.physics.add.group({
+        /*this.colliderCassable = this.physics.add.group({
             allowGravity: false,
             immovable: true
         });
-        const colliderCLayer = this.map.getObjectLayer('colliders cassable')
-        colliderCLayer.objects.forEach(collidersC=> {
-            const {x = 0, y = 0, width = 0, height = 0} = collidersC
-            var collidersC = this.add.rectangle(x, y, width, height).setOrigin(0, 0)
-            collidersC = this.physics.add.existing(collidersC)
-            this.collidersC.add(collidersC)
-            this.physics.add.collider(collidersC,this.player.player)
+        const colliderCassableLayer = this.map.getObjectLayer('colliders cassable')
+        colliderCassableLayer.objects.forEach(item=> {
+            let colliderC = this.add.rectangle(item.x, item.y, item.width, item.height).setOrigin(0, 0)
+            this.colliderCassable.add(colliderC)
+            this.physics.add.collider(colliderC,this.player.player)
         })*/
 
 
-        //RENOMMER LES VARIABLES
         this.plateformes = this.physics.add.group({
             allowGravity: false,
             immovable: true
@@ -55,7 +52,6 @@ class scene extends Phaser.Scene {
             this.plateformes.add(collider)
             this.physics.add.collider(collider,this.player.player);
         });
-
 
 
         this.colliderSol = this.physics.add.group({
