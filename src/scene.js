@@ -12,12 +12,20 @@ class scene extends Phaser.Scene {
         this.load.tilemapTiledJSON('map', 'assets/tilemaps/blockout.json');
         this.load.image("yoyo", "assets/images/yoyo.png");
         this.load.image("fragment", "assets/images/fragment.png");
+        this.load.image("boss", "assets/images/antagoniste.png");
         this.load.atlas('run','assets/anim/run.png','assets/anim/run.json');
+
+        for (let m=1;m<=19;m++){
+            this.load.image('boss-'+m,'assets/anim/boss/atk1/boss_0'+m+'.png')
+        }
+        for (let m=1;m<=17;m++){
+            this.load.image('boss--'+m,'assets/anim/boss/atk2/bossatk2_'+m+'.png')
+        }
     }
 
     create() {
         let me = this;
-
+        this.checkatk = false;
         this.objet_fragment = 0;
 
         this.map = this.make.tilemap({ key: 'map' });
@@ -31,6 +39,12 @@ class scene extends Phaser.Scene {
         this.bg2 = this.add.sprite(0,0, 'cial').setOrigin(0,0).setVisible(false);
         this.alt = this.map.createLayer('alt', this.tileset, 0, 0).setVisible(false);
         this.solalt = this.map.createLayer('sol alt', this.tileset, 0, 0).setVisible(false);
+
+        this.boss = this.physics.add.sprite(12416,5568, 'boss').setOrigin(0, 0);
+        this.boss.setVisible(true);
+        this.boss.setDisplaySize(64*5,64*10);
+        this.boss.body.setAllowGravity(false);
+        this.boss.setImmovable(true);
 
         this.player = new Player(this)
 
@@ -54,7 +68,11 @@ class scene extends Phaser.Scene {
             immovable: true
         });
         this.map.getObjectLayer('fragments').objects.forEach(item=> {
-            this.fragment = this.fragments.create(item.x, item.y,"fragment").setOrigin(0, 0).setDisplaySize( item.width, item.height);});
+
+            let fragment = this.fragments.create(item.x, item.y,"fragment").setOrigin(0, 0).setDisplaySize( item.width, item.height);
+            this.fragments.add(fragment)
+        });
+
         this.physics.add.collider(this.player.player,this.fragments,function (joueur,fragment) {
             fragment.destroy();
             me.objet_fragment += 1;
@@ -81,6 +99,7 @@ class scene extends Phaser.Scene {
         this.map.getObjectLayer('colliders cassable condition').objects.forEach(item=> {
             this.mur_condition = this.murs_condition.create(item.x, item.y,"shrzeh").setOrigin(0, 0).setDisplaySize( item.width, item.height);});
         this.physics.add.collider(this.player.player,this.murs_condition);
+
         this.physics.add.collider(this.player.yoyo,this.murs_condition,function (yoyo,mur) {
             if (me.objet_fragment >= 7)
             {
@@ -98,6 +117,8 @@ class scene extends Phaser.Scene {
             let colliders = this.add.rectangle(item.x, item.y, item.width, item.height).setOrigin(0, 0)
             this.colliderSol.add(colliders)
             this.physics.add.collider(colliders,this.player.player)
+            this.physics.add.collider(colliders,this.boss)
+
         })
 
 
@@ -105,12 +126,85 @@ class scene extends Phaser.Scene {
 
         this.initKeyboard();
         this.Switch(true)
+        this.anims.create({
+            key: 'boss-atk',
+            frames: [
+                {key:'boss-1'},
+                {key:'boss-2'},
+                {key:'boss-3'},
+                {key:'boss-4'},
+                {key:'boss-5'},
+                {key:'boss-6'},
+                {key:'boss-7'},
+                {key:'boss-8'},
+                {key:'boss-9'},
+                {key:'boss-10'},
+                {key:'boss-11'},
+                {key:'boss-12'},
+                {key:'boss-13'},
+                {key:'boss-14'},
+                {key:'boss-15'},
+                {key:'boss-16'},
+                {key:'boss-17'},
+                {key:'boss-18'},
+                {key:'boss-19'},
+            ],
+            frameRate: 19,
+            repeat: -1});
 
+        this.anims.create({
+            key: 'boss-atk2',
+            frames: [
+                {key:'boss--1'},
+                {key:'boss--2'},
+                {key:'boss--3'},
+                {key:'boss--4'},
+                {key:'boss--5'},
+                {key:'boss--6'},
+                {key:'boss--7'},
+                {key:'boss--8'},
+                {key:'boss--9'},
+                {key:'boss--10'},
+                {key:'boss--11'},
+                {key:'boss--12'},
+                {key:'boss--13'},
+                {key:'boss--14'},
+                {key:'boss--15'},
+                {key:'boss--16'},
+                {key:'boss--17'},
+            ],
+            frameRate: 17,
+            repeat: -1});
+    }
+
+
+
+    Bossattack(boss,player){
+        this.dist = Phaser.Math.Distance.BetweenPoints(player, boss);
+        if(this.dist <800) {
+            console.log("oui oui");
+            if (this.checkatk === true) {
+                let randatk = Phaser.Math.Between(1, 2)
+                if (randatk === 1) {
+                    boss.play('boss-atk');
+                } else {
+                boss.play('boss-atk2');
+            }
+                this.checkatk = false
+        }
+            boss.setVelocityX(0);
+        }else{
+            this.checkatk = true
+            console.log("en avant");
+            boss.setVelocityX(-100);
+            boss.setTexture('boss');
+            //ici mettre idle de bossu
+        }
     }
     //changement de monde
     Switch(masquer=false){
         if(masquer){
-            this.fragments.visible = false;
+            this.fragments.setVisible(false);
             this.alt.visible = false;
             this.solalt.visible = false;
             this.bg2.visible = false;
@@ -122,7 +216,7 @@ class scene extends Phaser.Scene {
             });
         }
         else{
-            this.fragments.visible = true;
+            this.fragments.setVisible(true);
             this.alt.visible = true;
             this.solalt.visible = true;
             this.bg2.visible = true;
@@ -155,7 +249,7 @@ class scene extends Phaser.Scene {
     }
 
     update() {
-
+        this.Bossattack(this.boss,this.player.player)
         this.player.update();
         this.player.move();
 
