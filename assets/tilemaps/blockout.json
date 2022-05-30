@@ -1799,19 +1799,6 @@
          "tilecount":510,
          "tileheight":64,
          "tilewidth":64
-        }, 
-        {
-         "columns":30,
-         "firstgid":511,
-         "image":"..\/tilesets\/tilesheetPS2.png",
-         "imageheight":1088,
-         "imagewidth":1920,
-         "margin":0,
-         "name":"tilesheetPS2",
-         "spacing":0,
-         "tilecount":510,
-         "tileheight":64,
-         "tilewidth":64
         }],
  "tilewidth":64,
  "type":"map",
