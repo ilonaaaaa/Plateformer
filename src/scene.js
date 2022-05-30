@@ -16,6 +16,9 @@ class scene extends Phaser.Scene {
     }
 
     create() {
+        let me = this;
+
+        this.objet_fragment = 0;
 
         this.map = this.make.tilemap({ key: 'map' });
         this.tileset = this.map.addTilesetImage('tilesheetPS2', 'tiles');
@@ -29,22 +32,10 @@ class scene extends Phaser.Scene {
         this.alt = this.map.createLayer('alt', this.tileset, 0, 0).setVisible(false);
         this.solalt = this.map.createLayer('sol alt', this.tileset, 0, 0).setVisible(false);
 
-        //this.fragmentlayer = this.map.getObjectLayer('fragment')['objects'];
         this.player = new Player(this)
 
 
-        /*this.colliderCassable = this.physics.add.group({
-            allowGravity: false,
-            immovable: true
-        });
-        const colliderCassableLayer = this.map.getObjectLayer('colliders cassable')
-        colliderCassableLayer.objects.forEach(item=> {
-            let colliderC = this.add.rectangle(item.x, item.y, item.width, item.height).setOrigin(0, 0)
-            this.colliderCassable.add(colliderC)
-            this.physics.add.collider(colliderC,this.player.player)
-        })*/
-
-
+        //colliders des plateformes
         this.plateformes = this.physics.add.group({
             allowGravity: false,
             immovable: true
@@ -56,7 +47,48 @@ class scene extends Phaser.Scene {
             this.physics.add.collider(collider,this.player.player);
         });
 
+        //colliders et destruction des fragments d'ame à récupérer
+        this.fragments = this.physics.add.group({
+            allowGravity: false,
+            immovable: true
+        });
+        this.map.getObjectLayer('fragments').objects.forEach(item=> {
+            this.fragment = this.fragments.create(item.x, item.y,"fragment").setOrigin(0, 0).setDisplaySize( item.width, item.height);
+        });
+        this.physics.add.collider(this.player.player,this.fragments,function (joueur,fragment) {
+            fragment.destroy();
+            me.objet_fragment += 1;
+        });
 
+        //colliders et destruction des murs cassables
+        this.murs = this.physics.add.group({
+            allowGravity: false,
+            immovable: true
+        });
+        this.map.getObjectLayer('colliders cassable').objects.forEach(item=> {
+            this.mur = this.murs.create(item.x, item.y,"shrzeh").setOrigin(0, 0).setDisplaySize( item.width, item.height);
+        });
+        this.physics.add.collider(this.player.player,this.murs);
+        this.physics.add.collider(this.player.yoyo,this.murs,function (yoyo,mur) {
+            mur.destroy();
+        });
+        //idem mais en ajoutant la condition que le joueur doit avoir récupéré les 7 fragments disponibles avant de pouvoir casser ce mur
+        this.murs_condition = this.physics.add.group({
+            allowGravity: false,
+            immovable: true
+        });
+        this.map.getObjectLayer('colliders cassable condition').objects.forEach(item=> {
+            this.mur_condition = this.murs_condition.create(item.x, item.y,"shrzeh").setOrigin(0, 0).setDisplaySize( item.width, item.height);
+        });
+        this.physics.add.collider(this.player.player,this.murs_condition);
+        this.physics.add.collider(this.player.yoyo,this.murs_condition,function (yoyo,mur) {
+            if (me.objet_fragment >= 7)
+            {
+                mur.destroy();
+            }
+        });
+
+        //collider avec le sol
         this.colliderSol = this.physics.add.group({
             allowGravity: false,
             immovable: true
@@ -71,14 +103,11 @@ class scene extends Phaser.Scene {
 
         this.cameras.main.startFollow(this.player.player,false, 0.15,0.10, -10, 196);
 
-
-        //OK, commenter le code et mettre yoyo dans player
-
         this.initKeyboard();
         this.Switch(true)
 
     }
-
+    //changement de monde
     Switch(masquer=false){
         if(masquer){
             this.alt.visible = false;

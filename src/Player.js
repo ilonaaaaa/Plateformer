@@ -24,7 +24,6 @@ class Player {
 
             if(this.yoyo.launch === false  && Phaser.Math.Distance.Between(me.player.x, me.player.y, pointer.worldX, pointer.worldY) <= 700){
                 console.log("lol")
-                //this.drawLine()
                 me.scene.input.keyboard.enabled = false;
                 me.yoyo.launch = true;
                 me.player.setVelocityX(0);
@@ -167,7 +166,6 @@ class Player {
 
             }
         }
-        //console.log(this.yoyo.launch)
     }
 
     }
