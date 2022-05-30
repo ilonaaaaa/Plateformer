@@ -37,6 +37,8 @@ class scene extends Phaser.Scene {
         this.sol = this.map.createLayer('decor2', this.tileset, 0, 0);
         this.reel = this.map.createLayer('reel', this.tileset, 0, 0);
         this.solreel = this.map.createLayer('sol reel', this.tileset, 0, 0);
+        this.salleBoss = this.map.createLayer('SalleBoss', this.tileset, 0, 0);
+        //this.salleBoss.setVisible(false);
 
         this.bg2 = this.add.sprite(0,0, 'cial').setOrigin(0,0).setVisible(false);
         this.alt = this.map.createLayer('alt', this.tileset, 0, 0).setVisible(false);
@@ -61,6 +63,18 @@ class scene extends Phaser.Scene {
             let collider = this.add.rectangle(item.x, item.y, item.width, item.height).setOrigin(0, 0)
             this.plateformes.add(collider)
             this.physics.add.collider(collider,this.player.player);
+        });
+
+        this.salleBoss = this.physics.add.group({
+            allowGravity: false,
+            immovable: true
+        });
+        const fsfs = this.map.getObjectLayer('SalleDeBoss')
+        fsfs.objects.forEach(porte=> {
+            let door = this.physics.add.sprite(porte.x, porte.y, 'fezshfgksjhgkshuglish').setOrigin(0, 0);
+            door.setDisplaySize(porte.width, porte.height);
+            this.salleBoss.add(door)
+            this.physics.add.collider(door,this.player.player);
         });
 
 
@@ -270,6 +284,7 @@ class scene extends Phaser.Scene {
                     me.Switch(true)
                     break;
                 case Phaser.Input.Keyboard.KeyCodes.R:
+                    me.player.player.x = 10432
                     me.Switch(false)
                     break;
             }
@@ -277,7 +292,24 @@ class scene extends Phaser.Scene {
     }
 
     update() {
-        this.Bossattack(this.boss,this.player.player)
+
+        if(this.player.player.x > 10432-32){
+            this.salleBoss.setVisible(true);
+            this.salleBoss.getChildren().forEach(child=>{
+                child.body.enable=true;
+            });
+
+            console.log("nan mais ou on est d'accords" +
+                "ok mlec")
+            this.Bossattack(this.boss,this.player.player)
+        }else{
+            this.salleBoss.setVisible(false);
+            this.salleBoss.getChildren().forEach(child=>{
+                child.body.enable=false;
+            });
+        }
+
+
         this.player.update();
         this.player.move();
 

@@ -4,8 +4,8 @@ class Player {
     constructor(scene) {
         this.scene=scene
         this.cameras=scene
-        //this.player = this.scene.physics.add.sprite(190, 6080, 'nino');
-        this.player = this.scene.physics.add.sprite(10639, 5742, 'nino');
+        this.player = this.scene.physics.add.sprite(190, 6080, 'nino');
+        //this.player = this.scene.physics.add.sprite(10639, 5742, 'nino');
         this.player.setBounce(0);
         this.player.setCollideWorldBounds(false);
         this.scene.physics.add.collider(this.player, this.scene.platform);
