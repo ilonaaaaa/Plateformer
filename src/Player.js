@@ -75,13 +75,13 @@ class Player {
         }
     }
     moveRight(){
-        this.player.setVelocityX(300);
+        this.player.setVelocityX(400);
         this.player.setFlipX(false);
         if (this.player.body.onFloor()) {
             this.player.play('run', true)}
     }
     moveLeft(){
-        this.player.setVelocityX(-300);
+        this.player.setVelocityX(-400);
         if (this.player.body.onFloor()) {
             this.player.play('run', true)}
         this.player.setFlipX(true);
