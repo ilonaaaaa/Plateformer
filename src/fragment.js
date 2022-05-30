@@ -24,7 +24,7 @@
 //         // });
 //         // text.setScrollFactor(0);
 //
-//         // this.function collectFrag(player, fragment) {
+//         // function collectFrag(player, fragment) {
 //         //     this.fragment.destroy(coin.x, coin.y); // remove the tile/coin
 //         //     //coinScore ++; // increment the score
 //         //     //text.setText(`Coins: ${coinScore}x`); // set the text to show the current score
