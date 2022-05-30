@@ -1896,17 +1896,39 @@
                  "width":64,
                  "x":192,
                  "y":6080
-                }, 
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":27,
+         "name":"SalleDeBoss",
+         "objects":[
                 {
-                 "height":128,
-                 "id":398,
+                 "height":1664,
+                 "id":402,
                  "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":6336,
-                 "y":5056
+                 "x":10240,
+                 "y":4736
+                }, 
+                {
+                 "height":1216,
+                 "id":403,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":12736,
+                 "y":4992
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1937,8 +1959,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":27,
- "nextobjectid":400,
+ "nextlayerid":28,
+ "nextobjectid":404,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.1",
