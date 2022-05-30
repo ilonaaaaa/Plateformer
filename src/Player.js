@@ -24,7 +24,6 @@ class Player {
         this.scene.input.on('pointerdown', function (pointer) {
 
             if(this.yoyo.launch === false  && Phaser.Math.Distance.Between(me.player.x, me.player.y, pointer.worldX, pointer.worldY) <= 700){
-                console.log("lol")
                 me.scene.input.keyboard.enabled = false;
                 me.yoyo.launch = true;
                 me.player.setVelocityX(0);

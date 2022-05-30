@@ -643,17 +643,6 @@
                 }, 
                 {
                  "height":64,
-                 "id":73,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":384,
-                 "x":5824,
-                 "y":960
-                }, 
-                {
-                 "height":64,
                  "id":76,
                  "name":"",
                  "rotation":0,
@@ -860,6 +849,17 @@
                  "width":192,
                  "x":5504,
                  "y":1728
+                }, 
+                {
+                 "height":64,
+                 "id":412,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":448,
+                 "x":5760,
+                 "y":960
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1873,7 +1873,7 @@
         {
          "draworder":"topdown",
          "id":26,
-         "name":"save",
+         "name":"Save",
          "objects":[
                 {
                  "height":128,
@@ -1896,6 +1896,84 @@
                  "width":64,
                  "x":192,
                  "y":6080
+                }, 
+                {
+                 "height":128,
+                 "id":406,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":6272,
+                 "y":5056
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "color":"#00ff00",
+         "draworder":"topdown",
+         "id":28,
+         "name":"ennemis",
+         "objects":[
+                {
+                 "height":192,
+                 "id":407,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":128,
+                 "x":3008,
+                 "y":4992
+                }, 
+                {
+                 "height":192,
+                 "id":408,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":128,
+                 "x":7232,
+                 "y":4928
+                }, 
+                {
+                 "height":192,
+                 "id":409,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":128,
+                 "x":4800,
+                 "y":6016
+                }, 
+                {
+                 "height":192,
+                 "id":410,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":128,
+                 "x":10048,
+                 "y":2752
+                }, 
+                {
+                 "height":128,
+                 "id":411,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":192,
+                 "x":5760,
+                 "y":1024
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1920,15 +1998,15 @@
                  "y":4736
                 }, 
                 {
-                 "height":1216,
-                 "id":403,
+                 "height":1536,
+                 "id":404,
                  "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":64,
                  "x":12736,
-                 "y":4992
+                 "y":4864
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1959,8 +2037,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":28,
- "nextobjectid":404,
+ "nextlayerid":29,
+ "nextobjectid":413,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.1",

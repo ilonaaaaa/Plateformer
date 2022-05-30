@@ -27,6 +27,8 @@ class scene extends Phaser.Scene {
         let me = this;
         this.checkatk = false;
         this.objet_fragment = 0;
+        this.currentSaveX = 190;
+        this.currentSaveY = 6080;
 
         this.map = this.make.tilemap({ key: 'map' });
         this.tileset = this.map.addTilesetImage('tilesheetPS2', 'tiles');
@@ -175,8 +177,34 @@ class scene extends Phaser.Scene {
             ],
             frameRate: 17,
             repeat: -1});
+
+        this.saves = this.physics.add.group({
+            allowGravity: false,
+            immovable: true
+        });
+
+        this.map.getObjectLayer('Save').objects.forEach((save) => {
+            this.saves.create(save.x, save.y- save.height, 'krkrkr').setOrigin(0);
+        });
+        this.physics.add.overlap(this.player.player, this.saves, this.sauvegarde, null, this)
+
+        this.physics.add.overlap(this.player.player,this.boss, this.die, null, this)
+
+
     }
 
+    die(){
+        this.player.player.x = this.currentSaveX + 40;
+        this.player.player.y = this.currentSaveY;
+    }
+
+    sauvegarde(player, saves) {
+
+        this.currentSaveX = saves.x
+        this.currentSaveY = saves.y-50
+        saves.body.enable = false;
+        console.log(this.currentSaveX)
+    }
 
 
     Bossattack(boss,player){
