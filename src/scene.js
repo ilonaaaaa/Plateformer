@@ -26,7 +26,6 @@ class scene extends Phaser.Scene {
         this.solreel = this.map.createLayer('sol reel', this.tileset, 0, 0);
 
         this.bg2 = this.add.sprite(0,0, 'cial').setOrigin(0,0).setVisible(false);
-        this.shiny = this.map.createLayer('shiny', this.tileset, 0, 0).setVisible(false);
         this.alt = this.map.createLayer('alt', this.tileset, 0, 0).setVisible(false);
         this.solalt = this.map.createLayer('sol alt', this.tileset, 0, 0).setVisible(false);
 
@@ -82,7 +81,6 @@ class scene extends Phaser.Scene {
 
     Switch(masquer=false){
         if(masquer){
-            this.shiny.visible = false;
             this.alt.visible = false;
             this.solalt.visible = false;
             this.bg2.visible = false;
@@ -91,7 +89,6 @@ class scene extends Phaser.Scene {
             });
         }
         else{
-            this.shiny.visible = true;
             this.alt.visible = true;
             this.solalt.visible = true;
             this.bg2.visible = true;
