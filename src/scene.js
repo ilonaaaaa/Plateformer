@@ -232,6 +232,14 @@ class scene extends Phaser.Scene {
                 } else {
                 boss.play('boss-atk2');
             }
+            // this.Reset = this.scene.time.addEvent({
+            //         delay: 25000,
+            //         callback: ()=>{
+            //             item.body.setEnable(true);
+            //             item.setVisible(true);
+            //         },
+            //         loop: false,
+            //     })
                 this.checkatk = false
         }
             boss.setVelocityX(0);
