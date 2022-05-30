@@ -110,10 +110,10 @@ class scene extends Phaser.Scene {
     //changement de monde
     Switch(masquer=false){
         if(masquer){
+            this.fragments.visible = false;
             this.alt.visible = false;
             this.solalt.visible = false;
             this.bg2.visible = false;
-            this.fragments.visible = false;
             this.plateformes.getChildren().forEach(child=>{
                 child.body.enable=false;
             });
@@ -122,10 +122,10 @@ class scene extends Phaser.Scene {
             });
         }
         else{
+            this.fragments.visible = true;
             this.alt.visible = true;
             this.solalt.visible = true;
             this.bg2.visible = true;
-            this.fragments.visible = true;
             this.plateformes.getChildren().forEach(child=>{
                 this.plateformes.getChildren().forEach(child=>{
                     child.body.enable=true;
