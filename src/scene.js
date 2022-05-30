@@ -137,7 +137,7 @@ class scene extends Phaser.Scene {
                 case Phaser.Input.Keyboard.KeyCodes.E:
                     me.Switch(true)
                     break;
-                case Phaser.Input.Keyboard.KeyCodes.F:
+                case Phaser.Input.Keyboard.KeyCodes.R:
                     me.Switch(false)
                     break;
             }
