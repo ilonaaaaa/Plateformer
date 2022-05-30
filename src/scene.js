@@ -72,11 +72,11 @@ class scene extends Phaser.Scene {
         //OK, commenter le code et mettre yoyo dans player
 
         this.initKeyboard();
-        this.masquerTrucs(true)
+        this.Switch(true)
 
     }
 
-    masquerTrucs(masquer=false){
+    Switch(masquer=false){
         if(masquer){
             this.shiny.visible = false;
             this.bg2.visible = false;
@@ -101,10 +101,10 @@ class scene extends Phaser.Scene {
         this.input.keyboard.on('keydown', function (kevent) {
             switch (kevent.keyCode) {
                 case Phaser.Input.Keyboard.KeyCodes.E:
-                    me.masquerTrucs(true)
+                    me.Switch(true)
                     break;
                 case Phaser.Input.Keyboard.KeyCodes.F:
-                    me.masquerTrucs(false)
+                    me.Switch(false)
                     break;
             }
         });
