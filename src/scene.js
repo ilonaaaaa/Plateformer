@@ -20,14 +20,16 @@ class scene extends Phaser.Scene {
         this.map = this.make.tilemap({ key: 'map' });
         this.tileset = this.map.addTilesetImage('tilesheetPS2', 'tiles');
         this.bg = this.add.sprite(0,0, 'ciel').setOrigin(0,0);
-        this.bg2 = this.add.sprite(0,0, 'cial').setOrigin(0,0).setVisible(false);
 
         this.sol = this.map.createLayer('decor2', this.tileset, 0, 0);
-        this.shiny = this.map.createLayer('shiny', this.tileset, 0, 0).setVisible(false);
         this.reel = this.map.createLayer('reel', this.tileset, 0, 0);
         this.solreel = this.map.createLayer('sol reel', this.tileset, 0, 0);
+
+        this.bg2 = this.add.sprite(0,0, 'cial').setOrigin(0,0).setVisible(false);
+        this.shiny = this.map.createLayer('shiny', this.tileset, 0, 0).setVisible(false);
         this.alt = this.map.createLayer('alt', this.tileset, 0, 0).setVisible(false);
         this.solalt = this.map.createLayer('sol alt', this.tileset, 0, 0).setVisible(false);
+
         //this.fragmentlayer = this.map.getObjectLayer('fragment')['objects'];
         this.player = new Player(this)
 
