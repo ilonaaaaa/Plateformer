@@ -24,7 +24,10 @@ class scene extends Phaser.Scene {
 
         this.sol = this.map.createLayer('decor2', this.tileset, 0, 0);
         this.shiny = this.map.createLayer('shiny', this.tileset, 0, 0).setVisible(false);
+        this.reel = this.map.createLayer('reel', this.tileset, 0, 0);
+        this.solreel = this.map.createLayer('sol reel', this.tileset, 0, 0);
         this.alt = this.map.createLayer('alt', this.tileset, 0, 0).setVisible(false);
+        this.solalt = this.map.createLayer('sol alt', this.tileset, 0, 0).setVisible(false);
         //this.fragmentlayer = this.map.getObjectLayer('fragment')['objects'];
         this.player = new Player(this)
 
@@ -79,6 +82,7 @@ class scene extends Phaser.Scene {
         if(masquer){
             this.shiny.visible = false;
             this.alt.visible = false;
+            this.solalt.visible = false;
             this.bg2.visible = false;
             this.plateformes.getChildren().forEach(child=>{
                 child.body.enable=false;
@@ -87,6 +91,7 @@ class scene extends Phaser.Scene {
         else{
             this.shiny.visible = true;
             this.alt.visible = true;
+            this.solalt.visible = true;
             this.bg2.visible = true;
             this.plateformes.getChildren().forEach(child=>{
                 this.plateformes.getChildren().forEach(child=>{
