@@ -13,7 +13,7 @@ class scene extends Phaser.Scene {
         this.load.image("yoyo", "assets/images/yoyo.png");
         this.load.image("fragment", "assets/images/fragment.png");
         this.load.image("boss", "assets/images/antagoniste.png");
-        this.load.atlas('run','assets/anim/run.png','assets/anim/run.json');
+        this.load.atlas('run','assets/anim/nino/run.png','assets/anim/nino/run.json');
 
         for (let m=1;m<=19;m++){
             this.load.image('boss-'+m,'assets/anim/boss/atk1/boss_0'+m+'.png')
