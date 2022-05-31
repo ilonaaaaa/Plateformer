@@ -13,6 +13,7 @@ class scene extends Phaser.Scene {
         this.load.image("yoyo", "assets/images/yoyo.png");
         this.load.image("fragment", "assets/images/fragment.png");
         this.load.image("boss", "assets/images/antagoniste.png");
+        this.load.image("plantus", "assets/images/plantus.png");
         this.load.spritesheet('Atk','assets/anim/nino/AtkSheet.png',{frameWidth: 203, frameHeight: 224});
         this.load.spritesheet('run','assets/anim/nino/run.png',{frameWidth: 182, frameHeight: 224});
         this.load.spritesheet('idle','assets/anim/nino/aie.png',{frameWidth: 200, frameHeight: 224});
@@ -23,6 +24,9 @@ class scene extends Phaser.Scene {
         }
         for (let m=1;m<=17;m++){
             this.load.image('boss--'+m,'assets/anim/boss/atk2/bossatk2_'+m+'.png')
+        }
+        for (let m=1;m<=11;m++){
+            this.load.image('plante-'+m,'assets/anim/plante/plantus_'+m+'.png')
         }
     }
 
@@ -144,11 +148,46 @@ class scene extends Phaser.Scene {
 
         })
 
+        this.anims.create({
+            key: 'plante-atk',
+            frames: [
+                {key:'plante-1'},
+                {key:'plante-2'},
+                {key:'plante-3'},
+                {key:'plante-4'},
+                {key:'plante-5'},
+                {key:'plante-6'},
+                {key:'plante-7'},
+                {key:'plante-8'},
+                {key:'plante-9'},
+                {key:'plante-10'},
+                {key:'plante-11'},
+            ],
+            frameRate: 10,
+            repeat: -1});
+
+        this.ennemi = this.physics.add.group({
+            allowGravity: false,
+            immovable: true
+        });
+        this.map.getObjectLayer('ennemis').objects.forEach((item) => {
+            const ennemiSprite = this.ennemi.create(item.x, item.y,'plantus').setOrigin(0, 0).setDisplaySize(item.width, item.height).play("plante-atk");});
+            this.physics.add.collider(this.player.player, this.ennemi, this.die,null, this)
+            this.physics.add.collider(this.player.yoyo,this.ennemi,function (yoyo,ennemy) {
+                {
+                    ennemy.destroy();
+                }
+            });
+
+
 
         this.cameras.main.startFollow(this.player.player,false, 0.15,0.10, -10, 196);
 
         this.initKeyboard();
         this.Switch(true)
+
+
+
         this.anims.create({
             key: 'boss-atk',
             frames: [
@@ -210,8 +249,6 @@ class scene extends Phaser.Scene {
         this.physics.add.overlap(this.player.player, this.saves, this.sauvegarde, null, this)
 
         this.physics.add.overlap(this.player.player,this.boss, this.die, null, this)
-
-
     }
 
     die(){
