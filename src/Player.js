@@ -30,6 +30,7 @@ class Player {
                 me.player.setVelocityY(0);
                 //me.player.body.setAllowGravity(false)
                 me.player.setImmovable(false)
+                me.player.play('Atk', true)
                 me.yoyoTween = me.scene.tweens.add({
                     targets: me.yoyo,
                     x: pointer.worldX,
@@ -47,13 +48,41 @@ class Player {
 
         this.scene.anims.create({
             key: 'run',
-            frameRate: 12,
-            frames: this.scene.anims.generateFrameNames('run', {prefix: 'run/run_',start:1,end:16, suffix:'.png'}),
-            repeat:-1
+            frames: this.scene.anims.generateFrameNames('run', {
+                start: 0,
+                end: 15,
+            }),
+            frameRate: 11,
+            repeat: -1
+        });
+        this.scene.anims.create({
+            key: 'idle',
+            frames: this.scene.anims.generateFrameNames('idle', {
+                start: 0,
+                end: 4,
+            }),
+            frameRate: 6,
+            repeat: -1
+        });
+        this.scene.anims.create({
+            key: 'jump',
+            frames: this.scene.anims.generateFrameNames('jump', {
+                start: 0,
+                end: 5,
+            }),
+            frameRate: 8,
+            repeat: 0
+        });
+        this.scene.anims.create({
+            key: 'Atk',
+            frames: this.scene.anims.generateFrameNames('Atk', {
+                start: 0,
+                end: 7,
+            }),
+            frameRate: 15,
+            repeat: -1
+        });
 
-
-
-        })
     }
 
 
@@ -88,9 +117,9 @@ class Player {
     }
     stop(){
         this.player.setVelocityX(0);
-        // if (this.player.body.onFloor()) {
-        //     this.player.play('idle',true)
-        // }
+        if (this.player.body.onFloor()) {
+            this.player.play('idle',true)
+        }
     }
 
 

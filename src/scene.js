@@ -8,12 +8,15 @@ class scene extends Phaser.Scene {
         this.load.image('tiles', 'assets/tilesets/tilesheetFT.png');
         this.load.image('ciel', 'assets/images/ciel.png');
         this.load.image('cial', 'assets/images/cial.png');
-        this.load.image('nino', 'assets/images/nino646464.png');
+        this.load.image('nino', 'assets/images/nino.png');
         this.load.tilemapTiledJSON('map', 'assets/tilemaps/blockout.json');
         this.load.image("yoyo", "assets/images/yoyo.png");
         this.load.image("fragment", "assets/images/fragment.png");
         this.load.image("boss", "assets/images/antagoniste.png");
-        this.load.atlas('run','assets/anim/nino/run.png','assets/anim/nino/run.json');
+        this.load.spritesheet('Atk','assets/anim/nino/AtkSheet.png',{frameWidth: 203, frameHeight: 224});
+        this.load.spritesheet('run','assets/anim/nino/run.png',{frameWidth: 182, frameHeight: 224});
+        this.load.spritesheet('idle','assets/anim/nino/aie.png',{frameWidth: 200, frameHeight: 224});
+        this.load.spritesheet('jump','assets/anim/nino/jump.png',{frameWidth: 182, frameHeight: 224});
 
         for (let m=1;m<=19;m++){
             this.load.image('boss-'+m,'assets/anim/boss/atk1/boss_0'+m+'.png')
