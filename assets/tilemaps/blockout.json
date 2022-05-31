@@ -1953,15 +1953,15 @@
                  "y":2752
                 }, 
                 {
-                 "height":128,
-                 "id":411,
+                 "height":192,
+                 "id":418,
                  "name":"",
-                 "rotation":90,
+                 "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":192,
-                 "x":5759.33333333333,
-                 "y":890.666666666667
+                 "width":128,
+                 "x":5630.66666666667,
+                 "y":867.333333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2026,7 +2026,7 @@
          "y":0
         }],
  "nextlayerid":30,
- "nextobjectid":418,
+ "nextobjectid":419,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.1",
