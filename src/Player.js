@@ -17,6 +17,7 @@ class Player {
         this.yoyo.setDisplaySize(20, 20)
         this.yoyo.launch = false;
         this.yoyo.body.setAllowGravity(false)
+        this.action=false
 
         this.initKeyboard();
         this.cursors = this.scene.input.keyboard.createCursorKeys();
@@ -38,6 +39,8 @@ class Player {
                     duration: 300,
                     ease: 'Power2',
                     yoyo: true,
+                    onStart:()=>{this.action=true},
+                    onComplete:()=>{ this.action=false }
                 });
             }
         }, this);
@@ -79,7 +82,7 @@ class Player {
                 start: 0,
                 end: 7,
             }),
-            frameRate: 15,
+            frameRate: 14,
             repeat: -1
         });
 
@@ -117,7 +120,7 @@ class Player {
     }
     stop(){
         this.player.setVelocityX(0);
-        if (this.player.body.onFloor()) {
+        if (this.player.body.onFloor() && this.action===false) {
             this.player.play('idle',true)
         }
     }

@@ -32,6 +32,7 @@ class scene extends Phaser.Scene {
         this.objet_fragment = 0;
         this.currentSaveX = 190;
         this.currentSaveY = 6080;
+        this.MondeAlt = false;
 
         this.map = this.make.tilemap({ key: 'map' });
         this.tileset = this.map.addTilesetImage('tilesheetPS2', 'tiles');
@@ -98,7 +99,7 @@ class scene extends Phaser.Scene {
         });
 
 
-        //colliders et destruction des murs cassables
+        //colliders et destruction des murs cassables si le monde est violet
         this.murs = this.physics.add.group({
             allowGravity: false,
             immovable: true
@@ -107,7 +108,11 @@ class scene extends Phaser.Scene {
             this.mur = this.murs.create(item.x, item.y,"fais le stp").setOrigin(0, 0).setDisplaySize( item.width, item.height);});
         this.physics.add.collider(this.player.player,this.murs);
         this.physics.add.collider(this.player.yoyo,this.murs,function (yoyo,mur) {
-            mur.destroy();
+            if (this.MondeAlt = true) //CA MARCHE PAAAAS
+            {
+                mur.destroy();
+            }
+            else {}
         });
 
         //idem mais en ajoutant la condition que le joueur doit avoir récupéré les 7 fragments disponibles avant de pouvoir casser ce mur
@@ -118,7 +123,6 @@ class scene extends Phaser.Scene {
         this.map.getObjectLayer('colliders cassable condition').objects.forEach(item=> {
             this.mur_condition = this.murs_condition.create(item.x, item.y,"shrzeh").setOrigin(0, 0).setDisplaySize( item.width, item.height);});
         this.physics.add.collider(this.player.player,this.murs_condition);
-
         this.physics.add.collider(this.player.yoyo,this.murs_condition,function (yoyo,mur) {
             if (me.objet_fragment >= 7)
             {
@@ -254,9 +258,11 @@ class scene extends Phaser.Scene {
             //ici mettre idle de bossu
         }
     }
+
     //changement de monde
     Switch(masquer=false){
         if(masquer){
+            this.MondeAlt = false;
             this.fragments.setVisible(false);
             this.alt.visible = false;
             this.solalt.visible = false;
@@ -269,6 +275,7 @@ class scene extends Phaser.Scene {
             });
         }
         else{
+            this.MondeAlt = true;
             this.fragments.setVisible(true);
             this.alt.visible = true;
             this.solalt.visible = true;
@@ -312,8 +319,6 @@ class scene extends Phaser.Scene {
                 child.body.enable=true;
             });
 
-            console.log("nan mais ou on est d'accords" +
-                "ok mlec")
             this.Bossattack(this.boss,this.player.player)
         }else{
             this.salleBoss.setVisible(false);
