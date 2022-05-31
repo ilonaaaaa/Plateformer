@@ -295,8 +295,10 @@ class scene extends Phaser.Scene {
                     me.Switch(true)
                     break;
                 case Phaser.Input.Keyboard.KeyCodes.R:
-                    me.player.player.x = 10432
                     me.Switch(false)
+                    break;
+                case Phaser.Input.Keyboard.KeyCodes.F:
+                    me.player.player.x = 10432
                     break;
             }
         });

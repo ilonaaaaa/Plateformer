@@ -26,11 +26,11 @@ class Player {
             if(this.yoyo.launch === false  && Phaser.Math.Distance.Between(me.player.x, me.player.y, pointer.worldX, pointer.worldY) <= 700){
                 me.scene.input.keyboard.enabled = false;
                 me.yoyo.launch = true;
+                me.player.play('Atk', true)
                 me.player.setVelocityX(0);
                 me.player.setVelocityY(0);
                 //me.player.body.setAllowGravity(false)
                 me.player.setImmovable(false)
-                me.player.play('Atk', true)
                 me.yoyoTween = me.scene.tweens.add({
                     targets: me.yoyo,
                     x: pointer.worldX,
