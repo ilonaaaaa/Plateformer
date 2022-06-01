@@ -1,7 +1,7 @@
 class scene extends Phaser.Scene {
 
-    constructor(key) {
-        super(key);
+    constructor() {
+        super('level');
     }
 
     preload() {
