@@ -37,6 +37,7 @@ class scene extends Phaser.Scene {
         this.currentSaveX = 190;
         this.currentSaveY = 6080;
         this.MondeAlt = true;
+        this.started = false;
 
         this.map = this.make.tilemap({ key: 'map' });
         this.tileset = this.map.addTilesetImage('tilesheetPS2', 'tiles');
@@ -53,11 +54,22 @@ class scene extends Phaser.Scene {
         this.solalt = this.map.createLayer('sol alt', this.tileset, 0, 0).setVisible(false);
 
         this.boss = this.physics.add.sprite(12416,5568, 'boss').setOrigin(0, 0);
-        this.boss.setVisible(true);
         this.boss.setDisplaySize(64*5,64*10);
         this.boss.setBodySize(64*3,64*10);
         this.boss.body.setAllowGravity(false);
         this.boss.setImmovable(true);
+
+        this.attack1 = this.physics.add.sprite(50000,50000, 'grdgg').setOrigin(0, 0);
+        this.attack1.setVisible(false);
+        this.attack1.setDisplaySize(64*5,64*10);
+        this.attack1.body.setAllowGravity(false);
+        this.attack1.setImmovable(true);
+
+        this.attack2 = this.physics.add.sprite(50000,50000, 'grdgg').setOrigin(0, 0);
+        this.attack2.setVisible(false);
+        this.attack2.setDisplaySize(64*5,64*10);
+        this.attack2.body.setAllowGravity(false);
+        this.attack2.setImmovable(true);
 
         this.player = new Player(this)
 
@@ -96,25 +108,39 @@ class scene extends Phaser.Scene {
 
             let fragment = this.fragments.create(item.x, item.y,"fragment").setOrigin(0, 0).setDisplaySize( item.width, item.height);
             this.fragments.add(fragment)
+            this.tweens.add({
+                targets: fragment,
+                y:fragment.y-20,
+                duration: 1000,
+                paused: false,
+                yoyo: true,
+                repeat: -1
+            });
+
         });
         this.physics.add.collider(this.player.player,this.fragments,function (joueur,fragment) {
             fragment.destroy();
+
             me.objet_fragment += 1;
         });
 
         //le dernier fragment qui lance les crédits du jeu
-        this.fragmentEndGame = this.physics.add.group({
+        this.Next = this.physics.add.group({
             allowGravity: false,
             immovable: true
         });
-        this.map.getObjectLayer('fragment endgame').objects.forEach(item=> {
-            let fragment = this.fragments.create(item.x, item.y,"fragment").setOrigin(0, 0).setDisplaySize( item.width, item.height);
-            this.fragments.add(fragment)
+        this.map.getObjectLayer('fragmentendgame').objects.forEach((Next) => {
+            this.NextSprite = this.Next.create(Next.x , Next.y -Next.height, 'fragment').setOrigin(0).setVisible(false);
+            this.tweens.add({
+                targets: this.NextSprite,
+                y:this.NextSprite.y-20,
+                duration: 1000,
+                paused: false,
+                yoyo: true,
+                repeat: -1
+            });
         });
-        this.physics.add.collider(this.player.player,this.fragments,function (joueur,fragment) {
-            fragment.destroy();
-
-        });
+        this.physics.add.overlap(this.player.player,this.NextSprite, this.NextZone, null, this);
 
 
         //colliders et destruction des murs cassables si le monde est reel
@@ -264,6 +290,8 @@ class scene extends Phaser.Scene {
         this.physics.add.overlap(this.player.player, this.saves, this.sauvegarde, null, this)
 
         this.physics.add.overlap(this.player.player,this.boss, this.die, null, this)
+        this.physics.add.overlap(this.player.player,this.attack1, this.die, null, this)
+        this.physics.add.overlap(this.player.player,this.attack2, this.die, null, this)
     }
 
     sauvegarde(player, saves) {
@@ -279,7 +307,15 @@ class scene extends Phaser.Scene {
         this.player.player.y = this.currentSaveY;
     }
 
-
+    NextZone(){
+        let me = this;
+        if (me.started === true){
+        }
+        else {
+            this.scene.start('credits')
+            this.started = true ;
+        }
+    }
 
 
     Bossattack(boss,player){
@@ -289,9 +325,14 @@ class scene extends Phaser.Scene {
             if (this.checkatk === true) {
                 let randatk = Phaser.Math.Between(1, 2)
                 if (randatk === 1) {
-                    this.add.rectangle(this.boss.x, this.boss.y, 500, 40).setOrigin(0, 0)
+
+                    this.attack1.x = boss.x;
+                    this.attack1.y = boss.y;
                     boss.play('boss-atk');
+
                 } else {
+                    this.attack2.x = boss.x;
+                    this.attack2.y = boss.y;
                 boss.play('boss-atk2');
 
                 //this.attac2 = this.add.rectangle(this.boss.x, this.boss.y, 500, 40).setOrigin(0, 0)
@@ -307,6 +348,11 @@ class scene extends Phaser.Scene {
         }
             boss.setVelocityX(0);
         }else{
+            this.attack1.x = -9999
+            this.attack1.y = -9999
+
+            this.attack2.x = -9999
+            this.attack2.y = -9999
             this.checkatk = true
             console.log("en avant");
             boss.setVelocityX(-100);
@@ -321,6 +367,8 @@ class scene extends Phaser.Scene {
         if(masquer){
             this.MondeAlt = false;
             this.fragments.setVisible(false);
+            this.Next.setVisible(false);
+            this.NextSprite.body.enable = false;
             this.alt.visible = false;
             this.solalt.visible = false;
             this.bg2.visible = false;
@@ -334,6 +382,8 @@ class scene extends Phaser.Scene {
         else{
             this.MondeAlt = true;
             this.fragments.setVisible(true);
+            this.Next.setVisible(true);
+            this.NextSprite.body.enable = true;
             this.alt.visible = true;
             this.solalt.visible = true;
             this.bg2.visible = true;
@@ -373,9 +423,7 @@ class scene extends Phaser.Scene {
     }
 
     update() {
-
-        console.log(this.MondeAlt)
-        if(this.player.player.x > 10432-32){
+        if(this.player.player.x >= 10395){
             this.salleBoss.setVisible(true);
             this.salleBoss.getChildren().forEach(child=>{
                 child.body.enable=true;
