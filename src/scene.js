@@ -96,10 +96,24 @@ class scene extends Phaser.Scene {
             let fragment = this.fragments.create(item.x, item.y,"fragment").setOrigin(0, 0).setDisplaySize( item.width, item.height);
             this.fragments.add(fragment)
         });
-
         this.physics.add.collider(this.player.player,this.fragments,function (joueur,fragment) {
             fragment.destroy();
             me.objet_fragment += 1;
+        });
+
+        //le dernier fragment qui lance les crédits du jeu
+        this.fragmentEndGame = this.physics.add.group({
+            allowGravity: false,
+            immovable: true
+        });
+        this.map.getObjectLayer('fragment endgame').objects.forEach(item=> {
+
+            let fragment = this.fragments.create(item.x, item.y,"fragment").setOrigin(0, 0).setDisplaySize( item.width, item.height);
+            this.fragments.add(fragment)
+        });
+        this.physics.add.collider(this.player.player,this.fragments,function (joueur,fragment) {
+            fragment.destroy();
+
         });
 
 
@@ -148,6 +162,7 @@ class scene extends Phaser.Scene {
 
         })
 
+
         this.anims.create({
             key: 'plante-atk',
             frames: [
@@ -181,12 +196,11 @@ class scene extends Phaser.Scene {
 
 
 
+
         this.cameras.main.startFollow(this.player.player,false, 0.15,0.10, -10, 196);
 
         this.initKeyboard();
         this.Switch(true)
-
-
 
         this.anims.create({
             key: 'boss-atk',
@@ -238,22 +252,18 @@ class scene extends Phaser.Scene {
             frameRate: 17,
             repeat: -1});
 
+
         this.saves = this.physics.add.group({
             allowGravity: false,
             immovable: true
         });
 
-        this.map.getObjectLayer('save').objects.forEach((save) => {
-            this.saves.create(save.x, save.y- save.height, 'save').setOrigin(0);
+        this.map.getObjectLayer('Save').objects.forEach((save) => {
+            this.saves.create(save.x, save.y- save.height, 'kzkz').setOrigin(0);
         });
         this.physics.add.overlap(this.player.player, this.saves, this.sauvegarde, null, this)
 
         this.physics.add.overlap(this.player.player,this.boss, this.die, null, this)
-    }
-
-    die(){
-        this.player.player.x = this.currentSaveX + 40;
-        this.player.player.y = this.currentSaveY;
     }
 
     sauvegarde(player, saves) {
@@ -263,6 +273,13 @@ class scene extends Phaser.Scene {
         saves.body.enable = false;
         console.log(this.currentSaveX)
     }
+
+    die(){
+        this.player.player.x = this.currentSaveX + 40;
+        this.player.player.y = this.currentSaveY;
+    }
+
+
 
 
     Bossattack(boss,player){
@@ -295,6 +312,7 @@ class scene extends Phaser.Scene {
             //ici mettre idle de bossu
         }
     }
+
 
     //changement de monde
     Switch(masquer=false){
@@ -344,6 +362,10 @@ class scene extends Phaser.Scene {
                 case Phaser.Input.Keyboard.KeyCodes.F:
                     me.player.player.x = 10432
                     break;
+                case Phaser.Input.Keyboard.KeyCodes.G:
+                    me.player.player.x = 5064
+                    me.player.player.y = 1840
+                    break;
             }
         });
     }
@@ -355,8 +377,8 @@ class scene extends Phaser.Scene {
             this.salleBoss.getChildren().forEach(child=>{
                 child.body.enable=true;
             });
-
             this.Bossattack(this.boss,this.player.player)
+
         }else{
             this.salleBoss.setVisible(false);
             this.salleBoss.getChildren().forEach(child=>{
