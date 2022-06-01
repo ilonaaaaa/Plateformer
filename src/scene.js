@@ -222,7 +222,7 @@ class scene extends Phaser.Scene {
 
 
 
-
+        this.input.mouse.disableContextMenu();
         this.cameras.main.startFollow(this.player.player,false, 0.15,0.10, -10, 196);
 
         this.initKeyboard();
