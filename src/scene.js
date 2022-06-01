@@ -55,6 +55,7 @@ class scene extends Phaser.Scene {
         this.boss = this.physics.add.sprite(12416,5568, 'boss').setOrigin(0, 0);
         this.boss.setVisible(true);
         this.boss.setDisplaySize(64*5,64*10);
+        this.boss.setBodySize(64*3,64*10);
         this.boss.body.setAllowGravity(false);
         this.boss.setImmovable(true);
 
@@ -224,7 +225,7 @@ class scene extends Phaser.Scene {
                 {key:'boss-18'},
                 {key:'boss-19'},
             ],
-            frameRate: 19,
+            frameRate: 15,
             repeat: -1});
 
         this.anims.create({
@@ -248,7 +249,7 @@ class scene extends Phaser.Scene {
                 {key:'boss--16'},
                 {key:'boss--17'},
             ],
-            frameRate: 17,
+            frameRate: 15,
             repeat: -1});
 
 
@@ -283,14 +284,17 @@ class scene extends Phaser.Scene {
 
     Bossattack(boss,player){
         this.dist = Phaser.Math.Distance.BetweenPoints(player, boss);
-        if(this.dist <800) {
+        if(this.dist <600) {
             console.log("oui oui");
             if (this.checkatk === true) {
                 let randatk = Phaser.Math.Between(1, 2)
                 if (randatk === 1) {
+                    this.add.rectangle(this.boss.x, this.boss.y, 500, 40).setOrigin(0, 0)
                     boss.play('boss-atk');
                 } else {
                 boss.play('boss-atk2');
+
+                //this.attac2 = this.add.rectangle(this.boss.x, this.boss.y, 500, 40).setOrigin(0, 0)
             }
             this.Reset = this.time.addEvent({
                     delay: 25000,
