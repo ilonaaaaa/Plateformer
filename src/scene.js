@@ -243,8 +243,8 @@ class scene extends Phaser.Scene {
             immovable: true
         });
 
-        this.map.getObjectLayer('Save').objects.forEach((save) => {
-            this.saves.create(save.x, save.y- save.height, 'krkrkr').setOrigin(0);
+        this.map.getObjectLayer('save').objects.forEach((save) => {
+            this.saves.create(save.x, save.y- save.height, 'save').setOrigin(0);
         });
         this.physics.add.overlap(this.player.player, this.saves, this.sauvegarde, null, this)
 
