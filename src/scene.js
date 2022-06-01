@@ -33,7 +33,7 @@ class scene extends Phaser.Scene {
     create() {
         let me = this;
         this.checkatk = false;
-        this.objet_fragment = 0;
+        window.objet_fragment = 0;
         this.currentSaveX = 190;
         this.currentSaveY = 6080;
         this.MondeAlt = true;
@@ -121,7 +121,7 @@ class scene extends Phaser.Scene {
         this.physics.add.collider(this.player.player,this.fragments,function (joueur,fragment) {
             fragment.destroy();
 
-            me.objet_fragment += 1;
+            window.objet_fragment += 1;
         });
 
         //le dernier fragment qui lance les crédits du jeu
@@ -289,9 +289,13 @@ class scene extends Phaser.Scene {
         });
         this.physics.add.overlap(this.player.player, this.saves, this.sauvegarde, null, this)
 
+
         this.physics.add.overlap(this.player.player,this.boss, this.die, null, this)
         this.physics.add.overlap(this.player.player,this.attack1, this.die, null, this)
         this.physics.add.overlap(this.player.player,this.attack2, this.die, null, this)
+
+        this.scene.launch('UI');
+
     }
 
     sauvegarde(player, saves) {
@@ -423,6 +427,7 @@ class scene extends Phaser.Scene {
     }
 
     update() {
+        console.log(window.objet_fragment)
         if(this.player.player.x >= 10395){
             this.salleBoss.setVisible(true);
             this.salleBoss.getChildren().forEach(child=>{
