@@ -168,7 +168,7 @@ class scene extends Phaser.Scene {
             this.mur_condition = this.murs_condition.create(item.x, item.y,"shrzeh").setOrigin(0, 0).setDisplaySize( item.width, item.height);});
         this.physics.add.collider(this.player.player,this.murs_condition);
         this.physics.add.collider(this.player.yoyo,this.murs_condition,function (yoyo,mur) {
-            if (me.objet_fragment >= 7)
+            if (window.objet_fragment >= 7)
             {
                 mur.destroy();
             }
