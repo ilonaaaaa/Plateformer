@@ -125,7 +125,7 @@ class scene extends Phaser.Scene {
             this.mur = this.murs.create(item.x, item.y,"fais le stp").setOrigin(0, 0).setDisplaySize( item.width, item.height);});
         this.physics.add.collider(this.player.player,this.murs);
         this.physics.add.collider(this.player.yoyo,this.murs,function (yoyo,mur) {
-            if (this.MondeAlt == false)
+            if (me.MondeAlt === false)
             {
                 mur.destroy();
             }
@@ -292,14 +292,13 @@ class scene extends Phaser.Scene {
                 } else {
                 boss.play('boss-atk2');
             }
-            // this.Reset = this.scene.time.addEvent({
-            //         delay: 25000,
-            //         callback: ()=>{
-            //             item.body.setEnable(true);
-            //             item.setVisible(true);
-            //         },
-            //         loop: false,
-            //     })
+            this.Reset = this.time.addEvent({
+                    delay: 25000,
+                    callback: ()=>{
+
+                    },
+                    loop: false,
+                })
                 this.checkatk = false
         }
             boss.setVelocityX(0);
