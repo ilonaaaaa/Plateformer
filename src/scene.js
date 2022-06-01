@@ -36,7 +36,7 @@ class scene extends Phaser.Scene {
         this.objet_fragment = 0;
         this.currentSaveX = 190;
         this.currentSaveY = 6080;
-        this.MondeAlt = false;
+        this.MondeAlt = true;
 
         this.map = this.make.tilemap({ key: 'map' });
         this.tileset = this.map.addTilesetImage('tilesheetPS2', 'tiles');
@@ -107,7 +107,6 @@ class scene extends Phaser.Scene {
             immovable: true
         });
         this.map.getObjectLayer('fragment endgame').objects.forEach(item=> {
-
             let fragment = this.fragments.create(item.x, item.y,"fragment").setOrigin(0, 0).setDisplaySize( item.width, item.height);
             this.fragments.add(fragment)
         });
@@ -117,7 +116,7 @@ class scene extends Phaser.Scene {
         });
 
 
-        //colliders et destruction des murs cassables si le monde est violet
+        //colliders et destruction des murs cassables si le monde est reel
         this.murs = this.physics.add.group({
             allowGravity: false,
             immovable: true
@@ -126,7 +125,7 @@ class scene extends Phaser.Scene {
             this.mur = this.murs.create(item.x, item.y,"fais le stp").setOrigin(0, 0).setDisplaySize( item.width, item.height);});
         this.physics.add.collider(this.player.player,this.murs);
         this.physics.add.collider(this.player.yoyo,this.murs,function (yoyo,mur) {
-            if (this.MondeAlt = true) //CA MARCHE PAAAAS
+            if (this.MondeAlt == false)
             {
                 mur.destroy();
             }
@@ -354,10 +353,10 @@ class scene extends Phaser.Scene {
         this.input.keyboard.on('keydown', function (kevent) {
             switch (kevent.keyCode) {
                 case Phaser.Input.Keyboard.KeyCodes.E:
-                    me.Switch(true)
+                    me.Switch(false)
                     break;
                 case Phaser.Input.Keyboard.KeyCodes.R:
-                    me.Switch(false)
+                    me.Switch(true)
                     break;
                 case Phaser.Input.Keyboard.KeyCodes.F:
                     me.player.player.x = 10432
@@ -372,6 +371,7 @@ class scene extends Phaser.Scene {
 
     update() {
 
+        console.log(this.MondeAlt)
         if(this.player.player.x > 10432-32){
             this.salleBoss.setVisible(true);
             this.salleBoss.getChildren().forEach(child=>{
