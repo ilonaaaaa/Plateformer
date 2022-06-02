@@ -166,7 +166,6 @@ class scene extends Phaser.Scene {
 
         this.map.getObjectLayer('colliders cassable').objects.forEach(item=> {
             this.mur = this.murs.create(item.x, item.y,"fais le stp").setOrigin(0, 0).setDisplaySize( item.width, item.height);
-            this.mur.name = item.name;
         });
         this.physics.add.collider(this.player.player,this.murs);
         this.physics.add.collider(this.player.yoyo,this.murs,function (yoyo,mur) {
