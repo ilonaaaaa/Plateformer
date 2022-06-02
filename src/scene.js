@@ -38,7 +38,7 @@ class scene extends Phaser.Scene {
         this.currentSaveY = 6080;
         this.MondeAlt = true;
         this.started = false;
-        this.bossLife = 60;
+        this.bossLife = 75;
 
         this.map = this.make.tilemap({ key: 'map' });
         this.tileset = this.map.addTilesetImage('tilesheetPS2', 'tiles');
@@ -158,14 +158,16 @@ class scene extends Phaser.Scene {
 
 
 
-
         //colliders et destruction des murs cassables si le monde est reel
         this.murs = this.physics.add.group({
             allowGravity: false,
             immovable: true
         });
+
         this.map.getObjectLayer('colliders cassable').objects.forEach(item=> {
-            this.mur = this.murs.create(item.x, item.y,"fais le stp").setOrigin(0, 0).setDisplaySize( item.width, item.height);});
+            this.mur = this.murs.create(item.x, item.y,"fais le stp").setOrigin(0, 0).setDisplaySize( item.width, item.height);
+            this.mur.name = item.name;
+        });
         this.physics.add.collider(this.player.player,this.murs);
         this.physics.add.collider(this.player.yoyo,this.murs,function (yoyo,mur) {
             if (me.MondeAlt === false)
@@ -175,16 +177,20 @@ class scene extends Phaser.Scene {
             else {}
         });
 
+
+
         //idem mais en ajoutant la condition que le joueur doit avoir récupéré les 7 fragments disponibles avant de pouvoir casser ce mur
         this.murs_condition = this.physics.add.group({
             allowGravity: false,
             immovable: true
         });
         this.map.getObjectLayer('colliders cassable condition').objects.forEach(item=> {
-            this.mur_condition = this.murs_condition.create(item.x, item.y,"shrzeh").setOrigin(0, 0).setDisplaySize( item.width, item.height);});
+            this.mur_condition = this.murs_condition.create(item.x, item.y,"shrzeh").setOrigin(0, 0).setDisplaySize( item.width, item.height);
+
+        });
         this.physics.add.collider(this.player.player,this.murs_condition);
         this.physics.add.collider(this.player.yoyo,this.murs_condition,function (yoyo,mur) {
-            if (window.objet_fragment >= 7)
+            if (window.objet_fragment >= 7 && me.MondeAlt===false)
             {
                 mur.destroy();
             }
@@ -451,6 +457,7 @@ class scene extends Phaser.Scene {
             this.NextSprite.body.enable = false;
             this.plan1alt.visible = false;
             this.alt.visible = false;
+            this.murs.setTexture('murreel');
             this.reel.visible = true;
             this.solalt.visible = false;
             this.persAtmoalt.visible=false;
@@ -472,6 +479,7 @@ class scene extends Phaser.Scene {
             this.NextSprite.body.enable = true;
             this.plan1alt.visible = true;
             this.alt.visible = true;
+            this.murs.setTexture('muralt');
             this.reel.visible = false;
             this.solalt.visible = true;
             this.persAtmoalt.visible=true;
@@ -519,7 +527,6 @@ class scene extends Phaser.Scene {
 
 
     update() {
-        console.log(this.bossLife)
         if(this.player.player.x >= 10395){
             this.salleBoss.setVisible(true);
             this.salleBoss.getChildren().forEach(child=>{
