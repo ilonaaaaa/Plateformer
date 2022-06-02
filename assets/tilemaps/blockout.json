@@ -269,7 +269,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -313,7 +313,7 @@
                  "y":4664
                 }, 
                 {
-                 "height":384,
+                 "height":447,
                  "id":104,
                  "name":"",
                  "rotation":0,
@@ -335,17 +335,6 @@
                  "y":4864
                 }, 
                 {
-                 "height":64,
-                 "id":106,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":5632,
-                 "y":5184
-                }, 
-                {
                  "height":320,
                  "id":107,
                  "name":"",
@@ -357,7 +346,7 @@
                  "y":4928
                 }, 
                 {
-                 "height":256,
+                 "height":293,
                  "id":108,
                  "name":"",
                  "rotation":0,
@@ -365,55 +354,11 @@
                  "visible":true,
                  "width":128,
                  "x":5888,
-                 "y":5056
-                }, 
-                {
-                 "height":64,
-                 "id":109,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":5888,
-                 "y":4992
-                }, 
-                {
-                 "height":64,
-                 "id":110,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":5824,
-                 "y":5248
-                }, 
-                {
-                 "height":128,
-                 "id":111,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":6016,
-                 "y":5120
-                }, 
-                {
-                 "height":64,
-                 "id":112,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":6080,
-                 "y":5184
+                 "y":5019
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -953,7 +898,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -1790,7 +1735,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -1889,7 +1834,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -1933,7 +1878,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -2000,7 +1945,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -2022,7 +1967,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -2046,7 +1991,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 

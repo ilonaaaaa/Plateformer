@@ -474,7 +474,7 @@ class scene extends Phaser.Scene {
             this.NextSprite.body.enable = false;
             this.plan1alt.visible = false;
             this.alt.visible = false;
-            this.mur.setTexture('murreel');
+            //this.mur.setTexture('murreel');
             this.reel.visible = true;
             this.solalt.visible = false;
             this.persAtmoalt.visible=false;
@@ -497,7 +497,7 @@ class scene extends Phaser.Scene {
             this.NextSprite.body.enable = true;
             this.plan1alt.visible = true;
             this.alt.visible = true;
-            this.mur.setTexture('muralt');
+            //this.mur.setTexture('muralt');
             this.reel.visible = false;
             this.solalt.visible = true;
             this.persAtmoalt.visible=true;
