@@ -236,7 +236,8 @@ class scene extends Phaser.Scene {
 
 
         this.input.mouse.disableContextMenu();
-        this.cameras.main.startFollow(this.player.player,false, 0.15,0.10, -10, 196);
+        this.cameras.main.startFollow(this.player.player,false, 0.15,0.10, -10, 100);
+        this.cameras.main.setZoom(0.8);
         this.initKeyboard();
         this.Switch(true)
 
