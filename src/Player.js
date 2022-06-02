@@ -54,7 +54,7 @@ class Player {
                 start: 0,
                 end: 15,
             }),
-            frameRate: 11,
+            frameRate: 12,
             repeat: -1
         });
         this.scene.anims.create({

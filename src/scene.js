@@ -18,6 +18,7 @@ class scene extends Phaser.Scene {
         this.load.image("indic", "assets/images/indic.png");
         this.load.image("boss", "assets/images/antagoniste.png");
         this.load.image("plantus", "assets/images/plantus.png");
+        this.load.image("collid", "assets/images/CASSTOU.png");
         this.load.spritesheet('Atk','assets/anim/nino/AtkSheet.png',{frameWidth: 203, frameHeight: 224});
         this.load.spritesheet('run','assets/anim/nino/run.png',{frameWidth: 182, frameHeight: 224});
         this.load.spritesheet('idle','assets/anim/nino/aie.png',{frameWidth: 200, frameHeight: 224});
@@ -180,7 +181,7 @@ class scene extends Phaser.Scene {
         });
 
         this.map.getObjectLayer('colliders cassable').objects.forEach(item=> {
-            this.mur = this.murs.create(item.x, item.y,"fais le stp").setOrigin(0, 0).setDisplaySize( item.width, item.height);
+            this.mur = this.murs.create(item.x, item.y,"collid").setOrigin(0, 0).setDisplaySize( item.width, item.height);
         });
         this.physics.add.collider(this.player.player,this.murs);
         this.physics.add.collider(this.player.yoyo,this.murs,function (yoyo,mur) {
@@ -199,7 +200,7 @@ class scene extends Phaser.Scene {
             immovable: true
         });
         this.map.getObjectLayer('colliders cassable condition').objects.forEach(item=> {
-            this.mur_condition = this.murs_condition.create(item.x, item.y,"shrzeh").setOrigin(0, 0).setDisplaySize( item.width, item.height);
+            this.mur_condition = this.murs_condition.create(item.x, item.y,"collid").setOrigin(0, 0).setDisplaySize( item.width, item.height);
 
         });
         this.physics.add.collider(this.player.player,this.murs_condition);
@@ -531,10 +532,10 @@ class scene extends Phaser.Scene {
                     me.Switch(true)
                     break;
                 //les deux prochaines touches sont la pour faciliter le deplacement rapide dans le niveau si besoin
-                case Phaser.Input.Keyboard.KeyCodes.F:
+                case Phaser.Input.Keyboard.KeyCodes.L:
                     me.player.player.x = 10432
                     break;
-                case Phaser.Input.Keyboard.KeyCodes.G:
+                case Phaser.Input.Keyboard.KeyCodes.M:
                     me.player.player.x = 5064
                     me.player.player.y = 1840
                     break;
