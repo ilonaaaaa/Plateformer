@@ -5,9 +5,9 @@ class Start extends Phaser.Scene {
 
     preload(){
 
-        this.load.image('MainScreen', 'assets/images/title_screen.png');
-        this.load.image('Play', 'assets/images/bouton_start.png');
-        this.load.image('Credits', 'assets/images/bouton_credits.png');
+        this.load.image('MainScreen', 'assets/images/menu/title_screen.png');
+        this.load.image('Play', 'assets/images/menu/bouton_start.png');
+        this.load.image('Credits', 'assets/images/menu/bouton_credits.png');
 
 
     }

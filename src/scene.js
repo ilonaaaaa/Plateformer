@@ -6,8 +6,10 @@ class scene extends Phaser.Scene {
 
     preload() {
         this.load.image('tiles', 'assets/tilesets/tilesheetFT.png');
-        this.load.image('ciel', 'assets/images/ciel.png');
-        this.load.image('cial', 'assets/images/cial.png');
+        this.load.image('ciel', 'assets/images/decor/ciel.png');
+        this.load.image('cial', 'assets/images/decor/cial.png');
+        this.load.image('plan2a', 'assets/images/decor/plan_alt2.png');
+        this.load.image('plan2r', 'assets/images/decor/plan_reel2.png');
         this.load.image('nino', 'assets/images/nino.png');
         this.load.tilemapTiledJSON('map', 'assets/tilemaps/blockout.json');
         this.load.image("yoyo", "assets/images/yoyo.png");
@@ -44,6 +46,9 @@ class scene extends Phaser.Scene {
         this.tileset = this.map.addTilesetImage('tilesheetPS2', 'tiles');
         this.bg = this.add.sprite(0,0, 'ciel').setOrigin(0,0);
         this.bg2 = this.add.sprite(0,0, 'cial').setOrigin(0,0).setVisible(false);
+        this.p2r = this.add.sprite(0,0, 'plan2r').setOrigin(0,0);
+        this.p2a = this.add.sprite(0,0, 'plan2a').setOrigin(0,0).setVisible(false);
+        
 
         this.plan3reel = this.map.createLayer('Plan3reel', this.tileset, 0, 0);
         this.plan3alt = this.map.createLayer('Plan3alt', this.tileset, 0, 0);
@@ -112,25 +117,6 @@ class scene extends Phaser.Scene {
         });
 
 
-        this.indics = this.physics.add.group({
-            allowGravity: false,
-            immovable: true
-        });
-        this.map.getObjectLayer('indicfrag').objects.forEach(item=> {
-
-            this.indicSprite = this.indics.create(item.x , item.y, 'fragment').setOrigin(0).setAlpha(0.5);
-            this.indicSprite.name = item.name;
-            this.tweens.add({
-                targets: this.indicSprite,
-                y:this.indicSprite.y-20,
-                duration: 1000,
-                paused: false,
-                yoyo: true,
-                repeat: -1
-            });
-
-        });
-
 
         //colliders et destruction des fragments d'ame à récupérer
         this.fragments = this.physics.add.group({
@@ -153,12 +139,6 @@ class scene extends Phaser.Scene {
 
         });
         this.physics.add.collider(this.player.player,this.fragments,function (joueur,fragment) {
-            /**for (var i = 0; i < this.indics.getChildren().length; i++) {
-                if (fragment.name === this.indics.getChildren()[i].name) {
-                    this.indics.getChildren()[i].visible = false;
-                    this.indics.getChildren()[i].body.enable = false;
-                }
-            }*/
 
             fragment.destroy();
             window.objet_fragment += 1;
