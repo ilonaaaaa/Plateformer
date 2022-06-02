@@ -5,17 +5,17 @@ class UI extends Phaser.Scene {
     }
 
     preload(){
-        //this.load.image('lucioleUi', 'Alpha wtf/assets/images/lucioleUi.png');
+        this.load.image('fragUi', 'assets/images/fragment.png');
     }
 
     create(){
         let me = this;
         const {width, height}= this.scale
 
-        //this.add.sprite(50,50,'lucioleUi')
-            //.setDisplaySize(40,40);
+        this.add.sprite(50,50,'fragUi')
+            .setDisplaySize(40,40);
 
-        this.count1 = this.add.text(50 ,50 , window.objet_fragment + '/9',{
+        this.count1 = this.add.text(100 ,50 , window.objet_fragment + '/9',{
             color: '#ffffff',
             fontFamily: 'cursive',
             fontSize : 40
@@ -24,7 +24,7 @@ class UI extends Phaser.Scene {
             .setAlpha(1)
 
 
-        this.count2 = this.add.text(50 ,50 , window.objet_fragment + '/9, end wall breakable !',{
+        this.count2 = this.add.text(100 ,50 , window.objet_fragment + '/9, end wall breakable !',{
             color: '#ffffff',
             fontFamily: 'cursive',
             fontSize : 40

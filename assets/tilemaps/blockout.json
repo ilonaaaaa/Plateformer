@@ -1921,15 +1921,16 @@
          "name":"fragmentendgame",
          "objects":[
                 {
+                 "gid":5695,
                  "height":64,
-                 "id":386,
+                 "id":425,
                  "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":12480,
-                 "y":6016
+                 "x":12484,
+                 "y":6120
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1938,7 +1939,7 @@
          "y":0
         }],
  "nextlayerid":30,
- "nextobjectid":425,
+ "nextobjectid":426,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.1",
@@ -1955,6 +1956,29 @@
          "spacing":0,
          "tilecount":5694,
          "tileheight":64,
+         "tilewidth":64
+        }, 
+        {
+         "columns":0,
+         "firstgid":5695,
+         "grid":
+            {
+             "height":1,
+             "orientation":"orthogonal",
+             "width":1
+            },
+         "margin":0,
+         "name":"objets",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":64,
+         "tiles":[
+                {
+                 "id":0,
+                 "image":"..\/images\/fragment.png",
+                 "imageheight":64,
+                 "imagewidth":64
+                }],
          "tilewidth":64
         }],
  "tilewidth":64,
