@@ -74,6 +74,9 @@ class scene extends Phaser.Scene {
         this.player = new Player(this)
 
 
+
+
+
         //colliders des plateformes
         this.plateformes = this.physics.add.group({
             allowGravity: false,
@@ -97,6 +100,7 @@ class scene extends Phaser.Scene {
             this.salleBoss.add(door)
             this.physics.add.collider(door,this.player.player);
         });
+
 
 
         //colliders et destruction des fragments d'ame à récupérer
@@ -143,6 +147,8 @@ class scene extends Phaser.Scene {
         this.physics.add.overlap(this.player.player,this.NextSprite, this.NextZone, null, this);
 
 
+
+
         //colliders et destruction des murs cassables si le monde est reel
         this.murs = this.physics.add.group({
             allowGravity: false,
@@ -174,6 +180,8 @@ class scene extends Phaser.Scene {
             }
         });
 
+
+
         //collider avec le sol
         this.colliderSol = this.physics.add.group({
             allowGravity: false,
@@ -189,6 +197,9 @@ class scene extends Phaser.Scene {
         })
 
 
+
+
+        //animation pour l'ennemi
         this.anims.create({
             key: 'plante-atk',
             frames: [
@@ -207,6 +218,7 @@ class scene extends Phaser.Scene {
             frameRate: 10,
             repeat: -1});
 
+        // et son collider
         this.ennemi = this.physics.add.group({
             allowGravity: false,
             immovable: true
@@ -224,10 +236,11 @@ class scene extends Phaser.Scene {
 
         this.input.mouse.disableContextMenu();
         this.cameras.main.startFollow(this.player.player,false, 0.15,0.10, -10, 196);
-
         this.initKeyboard();
         this.Switch(true)
 
+
+        //animation pour les attaques du boss
         this.anims.create({
             key: 'boss-atk',
             frames: [
@@ -279,6 +292,8 @@ class scene extends Phaser.Scene {
             repeat: -1});
 
 
+
+        //création des checkpoints
         this.saves = this.physics.add.group({
             allowGravity: false,
             immovable: true
@@ -289,7 +304,6 @@ class scene extends Phaser.Scene {
         });
         this.physics.add.overlap(this.player.player, this.saves, this.sauvegarde, null, this)
 
-
         this.physics.add.overlap(this.player.player,this.boss, this.die, null, this)
         this.physics.add.overlap(this.player.player,this.attack1, this.die, null, this)
         this.physics.add.overlap(this.player.player,this.attack2, this.die, null, this)
@@ -298,6 +312,7 @@ class scene extends Phaser.Scene {
 
     }
 
+    //création de la fonction sauvegarde qui ramène le joueur à un endroit précis
     sauvegarde(player, saves) {
 
         this.currentSaveX = saves.x
@@ -311,6 +326,7 @@ class scene extends Phaser.Scene {
         this.player.player.y = this.currentSaveY;
     }
 
+    //apres avoir recupéré le dernier fragment, on lance une nouvelle scene pour les credits
     NextZone(){
         let me = this;
         if (me.started === true){
@@ -321,7 +337,7 @@ class scene extends Phaser.Scene {
         }
     }
 
-
+    //toutes les interactions du boss
     Bossattack(boss,player){
         this.dist = Phaser.Math.Distance.BetweenPoints(player, boss);
         if(this.dist <600) {
@@ -366,6 +382,7 @@ class scene extends Phaser.Scene {
     }
 
 
+
     //changement de monde
     Switch(masquer=false){
         if(masquer){
@@ -405,6 +422,7 @@ class scene extends Phaser.Scene {
     }
 
 
+
     initKeyboard(){
         let me = this;
         this.input.keyboard.on('keydown', function (kevent) {
@@ -415,6 +433,7 @@ class scene extends Phaser.Scene {
                 case Phaser.Input.Keyboard.KeyCodes.R:
                     me.Switch(true)
                     break;
+                //les deux prochaines touches sont la pour faciliter le deplacement rapide dans le niveau si besoin
                 case Phaser.Input.Keyboard.KeyCodes.F:
                     me.player.player.x = 10432
                     break;
@@ -425,6 +444,8 @@ class scene extends Phaser.Scene {
             }
         });
     }
+
+
 
     update() {
         console.log(window.objet_fragment)
