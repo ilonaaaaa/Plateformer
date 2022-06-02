@@ -13,6 +13,7 @@ class scene extends Phaser.Scene {
         this.load.image('nino', 'assets/images/nino.png');
         this.load.tilemapTiledJSON('map', 'assets/tilemaps/blockout.json');
         this.load.image("yoyo", "assets/images/yoyo.png");
+        this.load.image("SaveSprite", "assets/images/save.png");
         this.load.image("fragment", "assets/images/fragment.png");
         this.load.image("indic", "assets/images/indic.png");
         this.load.image("boss", "assets/images/antagoniste.png");
@@ -331,7 +332,7 @@ class scene extends Phaser.Scene {
         });
 
         this.map.getObjectLayer('Save').objects.forEach((save) => {
-            this.saves.create(save.x, save.y- save.height, 'kzkz').setOrigin(0);
+            this.saves.create(save.x, save.y- save.height, 'SaveSprite').setOrigin(0);
         });
         this.physics.add.overlap(this.player.player, this.saves, this.sauvegarde, null, this)
 
