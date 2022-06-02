@@ -1884,105 +1884,6 @@
         }, 
         {
          "draworder":"topdown",
-         "id":45,
-         "name":"indicfrag",
-         "objects":[
-                {
-                 "height":64,
-                 "id":476,
-                 "name":"2",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":704,
-                 "y":4800
-                }, 
-                {
-                 "height":64,
-                 "id":477,
-                 "name":"1",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":1436,
-                 "y":5986
-                }, 
-                {
-                 "height":64,
-                 "id":478,
-                 "name":"3",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":1662,
-                 "y":3776
-                }, 
-                {
-                 "height":64,
-                 "id":479,
-                 "name":"5",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":4928,
-                 "y":6080
-                }, 
-                {
-                 "height":64,
-                 "id":480,
-                 "name":"4",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":4800,
-                 "y":3968
-                }, 
-                {
-                 "height":64,
-                 "id":481,
-                 "name":"6",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":4928,
-                 "y":192
-                }, 
-                {
-                 "height":64,
-                 "id":482,
-                 "name":"8",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":9922,
-                 "y":5246
-                }, 
-                {
-                 "height":64,
-                 "id":483,
-                 "name":"7",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":9920,
-                 "y":2816
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "draworder":"topdown",
          "id":26,
          "name":"Save",
          "objects":[
@@ -2170,7 +2071,7 @@
  "nextobjectid":484,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.8.1",
+ "tiledversion":"1.7.2",
  "tileheight":64,
  "tilesets":[
         {
@@ -2211,6 +2112,6 @@
         }],
  "tilewidth":64,
  "type":"map",
- "version":"1.8",
+ "version":"1.6",
  "width":200
 }
