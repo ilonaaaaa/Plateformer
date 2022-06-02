@@ -250,7 +250,7 @@ class scene extends Phaser.Scene {
 
 
         this.input.mouse.disableContextMenu();
-        this.cameras.main.startFollow(this.player.player,false, 0.15,0.10, -10, 100);
+        this.cameras.main.startFollow(this.player.player,true, 0.15,0.10, -10, 100);
         this.cameras.main.setZoom(0.8);
         this.initKeyboard();
 
@@ -457,7 +457,7 @@ class scene extends Phaser.Scene {
             this.NextSprite.body.enable = false;
             this.plan1alt.visible = false;
             this.alt.visible = false;
-            this.murs.setTexture('murreel');
+            this.mur.setTexture('murreel');
             this.reel.visible = true;
             this.solalt.visible = false;
             this.persAtmoalt.visible=false;
@@ -479,7 +479,7 @@ class scene extends Phaser.Scene {
             this.NextSprite.body.enable = true;
             this.plan1alt.visible = true;
             this.alt.visible = true;
-            this.murs.setTexture('muralt');
+            this.mur.setTexture('muralt');
             this.reel.visible = false;
             this.solalt.visible = true;
             this.persAtmoalt.visible=true;
