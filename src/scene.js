@@ -248,7 +248,7 @@ class scene extends Phaser.Scene {
         this.cameras.main.startFollow(this.player.player,false, 0.15,0.10, -10, 100);
         this.cameras.main.setZoom(0.8);
         this.initKeyboard();
-        this.Switch(true)
+
 
 
         //animation pour les attaques du boss
@@ -326,7 +326,14 @@ class scene extends Phaser.Scene {
             }
         });
 
+        this.plan1reel = this.map.createLayer('Plan1reel', this.tileset, 0, 0);
+        this.plan1alt = this.map.createLayer('Plan1alt', this.tileset, 0, 0);
+
         //Gestion des parralaxes
+        this.plan1reel.scrollFactorX=1.02;
+        this.plan1reel.scrollFactorY=1.02;
+        this.plan1alt.scrollFactorX=1.02;
+        this.plan1alt.scrollFactorY=1.02;
         this.persAtmoreel.scrollFactorX=0.99;
         this.persAtmoreel.scrollFactorY=0.99;
         this.persAtmoalt.scrollFactorX=0.99;
@@ -343,6 +350,8 @@ class scene extends Phaser.Scene {
         this.plan3alt.scrollFactorY=0.97;
         this.plan3reel.scrollFactorX=0.97;
         this.plan3reel.scrollFactorY=0.97;
+
+        this.Switch(true)
 
         this.scene.launch('UI');
 
@@ -439,6 +448,7 @@ class scene extends Phaser.Scene {
             this.fragments.setVisible(false);
             this.Next.setVisible(false);
             this.NextSprite.body.enable = false;
+            this.plan1alt.visible = false;
             this.alt.visible = false;
             this.solalt.visible = false;
             this.persAtmoalt.visible=false;
@@ -458,6 +468,7 @@ class scene extends Phaser.Scene {
             this.fragments.setVisible(true);
             this.Next.setVisible(true);
             this.NextSprite.body.enable = true;
+            this.plan1alt.visible = true;
             this.alt.visible = true;
             this.solalt.visible = true;
             this.persAtmoalt.visible=true;
