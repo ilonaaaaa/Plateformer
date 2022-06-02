@@ -112,6 +112,25 @@ class scene extends Phaser.Scene {
         });
 
 
+        this.indics = this.physics.add.group({
+            allowGravity: false,
+            immovable: true
+        });
+        this.map.getObjectLayer('indicfrag').objects.forEach(item=> {
+
+            this.indicSprite = this.indics.create(item.x , item.y, 'fragment').setOrigin(0).setAlpha(0.5);
+            this.indicSprite.name = item.name;
+            this.tweens.add({
+                targets: this.indicSprite,
+                y:this.indicSprite.y-20,
+                duration: 1000,
+                paused: false,
+                yoyo: true,
+                repeat: -1
+            });
+
+        });
+
 
         //colliders et destruction des fragments d'ame à récupérer
         this.fragments = this.physics.add.group({
@@ -122,6 +141,7 @@ class scene extends Phaser.Scene {
 
             let fragment = this.fragments.create(item.x, item.y,"fragment").setOrigin(0, 0).setDisplaySize( item.width, item.height);
             this.fragments.add(fragment)
+            fragment.name = item.name;
             this.tweens.add({
                 targets: fragment,
                 y:fragment.y-20,
@@ -133,8 +153,14 @@ class scene extends Phaser.Scene {
 
         });
         this.physics.add.collider(this.player.player,this.fragments,function (joueur,fragment) {
-            fragment.destroy();
+            /**for (var i = 0; i < this.indics.getChildren().length; i++) {
+                if (fragment.name === this.indics.getChildren()[i].name) {
+                    this.indics.getChildren()[i].visible = false;
+                    this.indics.getChildren()[i].body.enable = false;
+                }
+            }*/
 
+            fragment.destroy();
             window.objet_fragment += 1;
         });
 
