@@ -38,6 +38,7 @@ class scene extends Phaser.Scene {
         this.currentSaveY = 6080;
         this.MondeAlt = true;
         this.started = false;
+        this.bossLife = 60;
 
         this.map = this.make.tilemap({ key: 'map' });
         this.tileset = this.map.addTilesetImage('tilesheetPS2', 'tiles');
@@ -307,6 +308,13 @@ class scene extends Phaser.Scene {
         this.physics.add.overlap(this.player.player,this.boss, this.die, null, this)
         this.physics.add.overlap(this.player.player,this.attack1, this.die, null, this)
         this.physics.add.overlap(this.player.player,this.attack2, this.die, null, this)
+        //Le boss perds de la vie quand on le touche
+        this.physics.add.collider(this.player.yoyo,this.boss,function (yoyo,boss) {
+            {
+                me.bossLife -= 1;
+                me.BossDed();
+            }
+        });
 
         this.scene.launch('UI');
 
@@ -381,6 +389,19 @@ class scene extends Phaser.Scene {
         }
     }
 
+    //mort du boss
+    BossDed(){
+        let me = this;
+        if(me.bossLife ===0){
+            me.boss.setVisible(false);
+            me.boss.body.enable = false;
+            me.attack1.body.enable=false;
+            me.attack2.body.enable = false;
+            me.attack1.visible = false;
+            me.attack2.visible = false;
+        }
+    }
+
 
 
     //changement de monde
@@ -448,7 +469,7 @@ class scene extends Phaser.Scene {
 
 
     update() {
-        console.log(window.objet_fragment)
+        console.log(this.bossLife)
         if(this.player.player.x >= 10395){
             this.salleBoss.setVisible(true);
             this.salleBoss.getChildren().forEach(child=>{
