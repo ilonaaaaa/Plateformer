@@ -160,6 +160,17 @@ class scene extends Phaser.Scene {
         this.physics.add.overlap(this.player.player,this.NextSprite, this.NextZone, null, this);
 
 
+        //colliders sur l'arbre pour l'easter egg
+        // this.colliderArbre = this.physics.add.group({
+        //     allowGravity: false,
+        //     immovable: true
+        // });
+        // this.map.getObjectLayer('colliders arbre').objects.forEach(item=> {
+        //     this.colArbre = this.colArbre.create(item.x, item.y).setOrigin(0, 0).setDisplaySize( item.width, item.height);
+        //
+        // });
+        // this.physics.add.collider(this.player.player,this.colArbre);
+
 
         //colliders et destruction des murs cassables si le monde est reel
         this.murs = this.physics.add.group({
