@@ -94,25 +94,25 @@ class Player {
         else{
             this.pokemon = true
             if(this.player.body.onFloor()){
-                this.player.setVelocityY(-700)
+                this.player.setVelocityY(-850)
                 this.player.play('jump',true)
                 this.saut =1 ;
             }
             if(this.saut === 1 && !this.player.body.onFloor()){
-                this.player.setVelocityY(-800)
+                this.player.setVelocityY(-750)
                 this.player.play('jump',true)
                 this.saut = 0;
             }
         }
     }
     moveRight(){
-        this.player.setVelocityX(380);
+        this.player.setVelocityX(400);
         this.player.setFlipX(false);
         if (this.player.body.onFloor()) {
             this.player.play('run', true)}
     }
     moveLeft(){
-        this.player.setVelocityX(-380);
+        this.player.setVelocityX(-400);
         if (this.player.body.onFloor()) {
             this.player.play('run', true)}
         this.player.setFlipX(true);
