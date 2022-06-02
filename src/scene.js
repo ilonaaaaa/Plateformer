@@ -116,8 +116,6 @@ class scene extends Phaser.Scene {
             this.physics.add.collider(door,this.player.player);
         });
 
-
-
         //colliders et destruction des fragments d'ame à récupérer
         this.fragments = this.physics.add.group({
             allowGravity: false,
