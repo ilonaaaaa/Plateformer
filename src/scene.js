@@ -449,10 +449,10 @@ class scene extends Phaser.Scene {
         this.input.keyboard.on('keydown', function (kevent) {
             switch (kevent.keyCode) {
                 case Phaser.Input.Keyboard.KeyCodes.E:
-                    me.Switch(false)
+                    me.Switch(true)
                     break;
                 case Phaser.Input.Keyboard.KeyCodes.R:
-                    me.Switch(true)
+                    me.Switch(false)
                     break;
                 //les deux prochaines touches sont la pour faciliter le deplacement rapide dans le niveau si besoin
                 case Phaser.Input.Keyboard.KeyCodes.F:
