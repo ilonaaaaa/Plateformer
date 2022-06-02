@@ -14,6 +14,7 @@ class scene extends Phaser.Scene {
         this.load.tilemapTiledJSON('map', 'assets/tilemaps/blockout.json');
         this.load.image("yoyo", "assets/images/yoyo.png");
         this.load.image("fragment", "assets/images/fragment.png");
+        this.load.image("indic", "assets/images/indic.png");
         this.load.image("boss", "assets/images/antagoniste.png");
         this.load.image("plantus", "assets/images/plantus.png");
         this.load.spritesheet('Atk','assets/anim/nino/AtkSheet.png',{frameWidth: 203, frameHeight: 224});
@@ -38,7 +39,7 @@ class scene extends Phaser.Scene {
         window.objet_fragment = 0;
         this.currentSaveX = 190;
         this.currentSaveY = 6080;
-        this.MondeAlt = true;
+        this.MondeAlt = false;
         this.started = false;
         this.bossLife = 75;
 
@@ -123,12 +124,10 @@ class scene extends Phaser.Scene {
         });
         this.map.getObjectLayer('fragments').objects.forEach(item=> {
 
-            let fragment = this.fragments.create(item.x, item.y,"fragment").setOrigin(0, 0).setDisplaySize( item.width, item.height);
-            this.fragments.add(fragment)
-            fragment.name = item.name;
+            this.fragSprite = this.fragments.create(item.x , item.y, 'fragment').setOrigin(0);
             this.tweens.add({
-                targets: fragment,
-                y:fragment.y-20,
+                targets: this.fragSprite,
+                y:this.fragSprite.y-20,
                 duration: 1000,
                 paused: false,
                 yoyo: true,
@@ -457,8 +456,9 @@ class scene extends Phaser.Scene {
     Switch(masquer=false){
         if(masquer){
             this.MondeAlt = false;
-            this.fragments.setVisible(false);
-            this.Next.setVisible(false);
+            //this.fragments.setVisible(false);
+            this.fragments.setAlpha(0.5);
+            this.Next.setAlpha(0.5);
             this.NextSprite.body.enable = false;
             this.plan1alt.visible = false;
             this.alt.visible = false;
@@ -479,8 +479,9 @@ class scene extends Phaser.Scene {
         }
         else{
             this.MondeAlt = true;
-            this.fragments.setVisible(true);
-            this.Next.setVisible(true);
+            //this.fragments.setVisible(true);
+            this.fragments.setAlpha(1);
+            this.Next.setAlpha(1);
             this.NextSprite.body.enable = true;
             this.plan1alt.visible = true;
             this.alt.visible = true;
@@ -545,7 +546,6 @@ class scene extends Phaser.Scene {
                 child.body.enable=false;
             });
         }
-
 
         this.player.update();
         this.player.move();
