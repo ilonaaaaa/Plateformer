@@ -378,6 +378,7 @@ class scene extends Phaser.Scene {
         }
         else {
             this.scene.start('credits')
+            this.scene.stop('UI');
             this.started = true ;
         }
     }
