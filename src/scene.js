@@ -382,6 +382,7 @@ class scene extends Phaser.Scene {
         }
     }
 
+
     //toutes les interactions du boss
     Bossattack(boss,player){
         this.dist = Phaser.Math.Distance.BetweenPoints(player, boss);
@@ -450,6 +451,7 @@ class scene extends Phaser.Scene {
             this.NextSprite.body.enable = false;
             this.plan1alt.visible = false;
             this.alt.visible = false;
+            this.reel.visible = true;
             this.solalt.visible = false;
             this.persAtmoalt.visible=false;
             this.plan2alt.visible=false;
@@ -470,6 +472,7 @@ class scene extends Phaser.Scene {
             this.NextSprite.body.enable = true;
             this.plan1alt.visible = true;
             this.alt.visible = true;
+            this.reel.visible = false;
             this.solalt.visible = true;
             this.persAtmoalt.visible=true;
             this.plan2alt.visible=true;
@@ -495,11 +498,11 @@ class scene extends Phaser.Scene {
         let me = this;
         this.input.keyboard.on('keydown', function (kevent) {
             switch (kevent.keyCode) {
-                case Phaser.Input.Keyboard.KeyCodes.E:
-                    me.Switch(true)
-                    break;
                 case Phaser.Input.Keyboard.KeyCodes.R:
                     me.Switch(false)
+                    break;
+                case Phaser.Input.Keyboard.KeyCodes.E:
+                    me.Switch(true)
                     break;
                 //les deux prochaines touches sont la pour faciliter le deplacement rapide dans le niveau si besoin
                 case Phaser.Input.Keyboard.KeyCodes.F:
