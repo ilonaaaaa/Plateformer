@@ -15,15 +15,15 @@ class Start extends Phaser.Scene {
     create(){
         const menu = this.add.image(0, 0, 'MainScreen').setOrigin(0, 0);
 
-        const buttonStartSprite = this.add.image(940, 650, 'Play')
+        const buttonStartSprite = this.add.image(915, 665, 'Play')
             .setOrigin(0, 0)
-            .setScale(1)
+            .setScale(0.835)
             .setAlpha(0.7);
 
 
-        const buttonCreditsSprite = this.add.image(230, 650, 'Credits')
+        const buttonCreditsSprite = this.add.image(380, 667, 'Credits')
             .setOrigin(0, 0)
-            .setScale(1)
+            .setScale(0.835)
             .setAlpha(0.7);
 
 
