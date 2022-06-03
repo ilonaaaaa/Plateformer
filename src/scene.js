@@ -329,14 +329,14 @@ class scene extends Phaser.Scene {
             }
         });
 
-        this.plan1reel = this.map.createLayer('Plan1reel', this.tileset, 0, 0);
-        this.plan1alt = this.map.createLayer('Plan1alt', this.tileset, 0, 0);
+        // this.plan1reel = this.map.createLayer('Plan1reel', this.tileset, 0, 0);
+        // this.plan1alt = this.map.createLayer('Plan1alt', this.tileset, 0, 0);
 
         //Gestion des parralaxes
-        this.plan1reel.scrollFactorX=1.02;
-        this.plan1reel.scrollFactorY=1.02;
-        this.plan1alt.scrollFactorX=1.02;
-        this.plan1alt.scrollFactorY=1.02;
+        // this.plan1reel.scrollFactorX=1.02;
+        // this.plan1reel.scrollFactorY=1.02;
+        // this.plan1alt.scrollFactorX=1.02;
+        // this.plan1alt.scrollFactorY=1.02;
         this.persAtmoreel.scrollFactorX=0.99;
         this.persAtmoreel.scrollFactorY=0.99;
         this.persAtmoalt.scrollFactorX=0.99;
