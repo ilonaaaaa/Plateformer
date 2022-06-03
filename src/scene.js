@@ -30,10 +30,6 @@ class scene extends Phaser.Scene {
         this.load.image('bossBase','assets/anim/boss/Atk1bas.png');
         this.load.image('boss2Base','assets/anim/boss/Atk2bas.png');
         this.load.image('idlebossBase','assets/anim/boss/IdlBas.png');
-        /**this.load.image('PReel','assets/images/pReel.png');
-        this.load.image('PReel2','assets/images/pReel2.png');
-        this.load.image('PAlt1','assets/images/PAlt1.png');
-        this.load.image('PAlt2','assets/images/PAlt2.png');*/
 
         for (let m=1;m<=11;m++){
             this.load.image('plante-'+m,'assets/anim/plante/plantus_'+m+'.png')
@@ -65,24 +61,12 @@ class scene extends Phaser.Scene {
         this.tileset = this.map.addTilesetImage('tilesheetPS2', 'tiles');
         this.bg = this.add.sprite(0,0, 'ciel').setOrigin(0,0);
         this.bg2 = this.add.sprite(0,0, 'cial').setOrigin(0,0).setVisible(false);
-        this.p2r = this.add.sprite(0,0, 'plan2r').setOrigin(0,0);
-        this.p2a = this.add.sprite(0,0, 'plan2a').setOrigin(0,0).setVisible(false);
         
 
         this.plan3reel = this.map.createLayer('Plan3reel', this.tileset, 0, 0);
         this.plan3alt = this.map.createLayer('Plan3alt', this.tileset, 0, 0);
-        /**this.p2reel = this.add.sprite(0,3896, 'PReel2').setOrigin(0,0);
-        this.p2Alt = this.add.sprite(0,3782, 'PAlt2').setOrigin(0,0).setVisible(false);*/
-        this.persAtmo2reel = this.map.createLayer('PersAtmo2reel', this.tileset, 0, 0);
-        this.persAtmo2alt = this.map.createLayer('PersAtmo2alt', this.tileset, 0, 0);
-        this.Arbresreel = this.map.createLayer('arbresFondreel', this.tileset, 0, 0);
-        this.Arbresalt = this.map.createLayer('arbresFondalt', this.tileset, 0, 0);
         this.plan2reel = this.map.createLayer('Plan2reel', this.tileset, 0, 0);
         this.plan2alt = this.map.createLayer('Plan2alt', this.tileset, 0, 0);
-        /**this.p1reel = this.add.sprite(0,4130, 'PReel1').setOrigin(0,0);
-        this.p1Alt = this.add.sprite(0,3969, 'PAlt1').setOrigin(0,0).setVisible(false);*/
-        this.persAtmoreel = this.map.createLayer('PersAtmoreel', this.tileset, 0, 0);
-        this.persAtmoalt = this.map.createLayer('PersAtmoalt', this.tileset, 0, 0);
 
         this.sol = this.map.createLayer('decor2', this.tileset, 0, 0);
         this.reel = this.map.createLayer('reel', this.tileset, 0, 0);
@@ -349,30 +333,10 @@ class scene extends Phaser.Scene {
         // this.plan1alt = this.map.createLayer('Plan1alt', this.tileset, 0, 0);
 
         //Gestion des parralaxes
-        // this.plan1reel.scrollFactorX=1.02;
-        // this.plan1reel.scrollFactorY=1.02;
-        // this.plan1alt.scrollFactorX=1.02;
-        // this.plan1alt.scrollFactorY=1.02;
-        this.persAtmoreel.scrollFactorX=0.99;
-        this.persAtmoreel.scrollFactorY=0.99;
-        this.persAtmoalt.scrollFactorX=0.99;
-        //this.p1Alt.scrollFactorX=0.99;
-        //this.p1reel.scrollFactorX=0.99;
-        this.persAtmoalt.scrollFactorY=0.99;
         this.plan2alt.scrollFactorX=0.99;
         this.plan2alt.scrollFactorY=0.99;
         this.plan2reel.scrollFactorX=0.99;
         this.plan2reel.scrollFactorY=0.99;
-        this.Arbresreel.scrollFactorX=0.98;
-        this.Arbresreel.scrollFactorY=0.99;
-        this.Arbresalt.scrollFactorX=0.98;
-        this.Arbresalt.scrollFactorY=0.99;
-        this.persAtmo2reel.scrollFactorX=0.98;
-        this.persAtmo2reel.scrollFactorY=0.98;
-        /**this.p2reel.scrollFactorX=0.98;
-        this.p2Alt.scrollFactorX=0.98;*/
-        this.persAtmo2alt.scrollFactorX=0.98;
-        this.persAtmo2alt.scrollFactorY=0.98;
         this.plan3alt.scrollFactorX=0.97;
         this.plan3alt.scrollFactorY=0.97;
         this.plan3reel.scrollFactorX=0.97;
@@ -494,16 +458,8 @@ class scene extends Phaser.Scene {
             }
             this.reel.visible = true;
             this.solalt.visible = false;
-            this.persAtmoalt.visible=false;
             this.plan2alt.visible=false;
             this.plan2reel.visible=true;
-            /**this.p1reel.visible=true;
-            this.p2reel.visible=true;
-            this.p1Alt.visible=false;
-            this.p2Alt.visible=false;*/
-            this.Arbresreel.visible = true;
-            this.Arbresalt.visible = false;
-            this.persAtmo2alt.visible=false;
             this.plan3alt.visible=false;
             this.plan3reel.visible=true;
             this.bg2.visible = false;
@@ -532,16 +488,8 @@ class scene extends Phaser.Scene {
             }
             this.reel.visible = false;
             this.solalt.visible = true;
-            this.persAtmoalt.visible=true;
             this.plan2alt.visible=true;
             this.plan2reel.visible=false;
-            /**this.p1reel.visible=false;
-            this.p2reel.visible=false;
-            this.p1Alt.visible=true;
-            this.p2Alt.visible=true;*/
-            this.Arbresreel.visible = false;
-            this.Arbresalt.visible = true;
-            this.persAtmo2alt.visible=true;
             this.plan3alt.visible=true;
             this.plan3reel.visible=false;
             this.bg2.visible = true;
