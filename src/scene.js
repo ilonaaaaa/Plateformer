@@ -27,18 +27,16 @@ class scene extends Phaser.Scene {
         this.load.spritesheet('bIdle','assets/anim/boss/bIdle.png',{frameWidth: 302, frameHeight: 528});
         this.load.spritesheet('bAtk1','assets/anim/boss/bAtk1.png',{frameWidth: 650, frameHeight: 528});
         this.load.spritesheet('bAtk2','assets/anim/boss/bAtk2.png',{frameWidth: 650, frameHeight: 528});
-
-
         this.load.image('bossBase','assets/anim/boss/Atk1bas.png')
-
-
         this.load.image('boss2Base','assets/anim/boss/Atk2bas.png')
-
         this.load.image('idlebossBase','assets/anim/boss/IdlBas.png')
 
         for (let m=1;m<=11;m++){
             this.load.image('plante-'+m,'assets/anim/plante/plantus_'+m+'.png')
         }
+
+        this.load.audio('Maintheme','assets/sounds/LevelMusic.mp3');
+        this.load.audio('Bosstheme','assets/sounds/BossMusic.mp3');
     }
 
     create() {
@@ -49,7 +47,15 @@ class scene extends Phaser.Scene {
         this.currentSaveY = 6080;
         this.MondeAlt = false;
         this.started = false;
-        this.bossLife = 75;
+        this.bossLife = 150;
+        this.musicSwap = false;
+
+        this.MainTheme = this.sound.add('Maintheme',{volume: 0.3});
+        this.MainTheme.loop = true;
+        this.MainTheme.play();
+
+        this.BossTheme = this.sound.add('Bosstheme',{volume: 0.3});
+        this.BossTheme.loop = true;
 
         this.map = this.make.tilemap({ key: 'map' });
         this.tileset = this.map.addTilesetImage('tilesheetPS2', 'tiles');
@@ -382,6 +388,7 @@ class scene extends Phaser.Scene {
         else {
             this.scene.start('credits')
             this.scene.stop('UI');
+            this.BossTheme.stop();
             this.started = true ;
         }
     }
@@ -459,6 +466,11 @@ class scene extends Phaser.Scene {
             this.NextSprite.body.enable = false;
             //this.plan1alt.visible = false;
             this.alt.visible = false;
+            if(window.objet_fragment >=7){
+                for(let i = 0;i < this.murs_condition.getChildren().length; i++){
+                    this.murs_condition.getChildren()[i].setTexture('collidindic');
+                }
+            }
             for(let i = 0;i < this.murs.getChildren().length; i++){
                 this.murs.getChildren()[i].setTexture('collidindic');
             }
@@ -486,6 +498,11 @@ class scene extends Phaser.Scene {
             this.NextSprite.body.enable = true;
             //this.plan1alt.visible = true;
             this.alt.visible = true;
+            if(window.objet_fragment >=7){
+                for(let i = 0;i < this.murs_condition.getChildren().length; i++){
+                    this.murs_condition.getChildren()[i].setTexture('collid');
+                }
+            }
             for(let i = 0;i < this.murs.getChildren().length; i++){
                 this.murs.getChildren()[i].setTexture('collid');
             }
@@ -550,6 +567,13 @@ class scene extends Phaser.Scene {
             this.salleBoss.getChildren().forEach(child=>{
                 child.body.enable=false;
             });
+        }
+
+        if(this.player.player.x >= 10395 && this.musicSwap === false){
+            this.MainTheme.stop();
+            this.BossTheme.play();
+            this.musicSwap = true;
+
         }
 
         this.player.update();
