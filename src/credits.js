@@ -4,7 +4,7 @@ class credits extends Phaser.Scene {
     }
 
     preload(){
-        this.load.image('MenuB', 'assets/images/menu/bouton_credits.png');
+        this.load.image('MenuB', 'assets/images/menu/bouton_start.png');
         this.load.image('fond', 'assets/images/menu/credits.png');
     }
 

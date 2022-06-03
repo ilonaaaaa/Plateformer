@@ -149,7 +149,7 @@ class scene extends Phaser.Scene {
             immovable: true
         });
         this.map.getObjectLayer('fragmentendgame').objects.forEach((Next) => {
-            this.NextSprite = this.Next.create(Next.x , Next.y -Next.height, 'fragment').setOrigin(0).setVisible(false);
+            this.NextSprite = this.Next.create(Next.x , Next.y -Next.height, 'fragment').setOrigin(0);
             this.tweens.add({
                 targets: this.NextSprite,
                 y:this.NextSprite.y-20,
