@@ -116,7 +116,7 @@ class scene extends Phaser.Scene {
         });
         const fsfs = this.map.getObjectLayer('SalleDeBoss')
         fsfs.objects.forEach(porte=> {
-            let door = this.physics.add.sprite(porte.x, porte.y, 'fezshfgksjhgkshuglish').setOrigin(0, 0);
+            let door = this.physics.add.sprite(porte.x, porte.y, 'collid').setOrigin(0, 0);
             door.setDisplaySize(porte.width, porte.height);
             this.salleBoss.add(door)
             this.physics.add.collider(door,this.player.player);
