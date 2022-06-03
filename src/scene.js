@@ -24,11 +24,14 @@ class scene extends Phaser.Scene {
         this.load.spritesheet('idle','assets/anim/nino/aie.png',{frameWidth: 200, frameHeight: 224});
         this.load.spritesheet('jump','assets/anim/nino/jump.png',{frameWidth: 182, frameHeight: 224});
 
-        for (let m=1;m<=19;m++){
+        for (let m=1;m<=22;m++){
             this.load.image('boss-'+m,'assets/anim/boss/atk1/boss_0'+m+'.png')
         }
-        for (let m=1;m<=17;m++){
+        for (let m=1;m<=20;m++){
             this.load.image('boss--'+m,'assets/anim/boss/atk2/bossatk2_'+m+'.png')
+        }
+        for (let m=1;m<=5;m++){
+            this.load.image('idleboss-'+m,'assets/anim/boss/idle/idle_'+m+'.png')
         }
         for (let m=1;m<=11;m++){
             this.load.image('plante-'+m,'assets/anim/plante/plantus_'+m+'.png')
@@ -296,8 +299,11 @@ class scene extends Phaser.Scene {
                 {key:'boss-17'},
                 {key:'boss-18'},
                 {key:'boss-19'},
+                {key:'boss-20'},
+                {key:'boss-21'},
+                {key:'boss-22'},
             ],
-            frameRate: 15,
+            frameRate: 16,
             repeat: -1});
 
         this.anims.create({
@@ -320,6 +326,21 @@ class scene extends Phaser.Scene {
                 {key:'boss--15'},
                 {key:'boss--16'},
                 {key:'boss--17'},
+                {key:'boss--18'},
+                {key:'boss--19'},
+                {key:'boss--20'},
+            ],
+            frameRate: 16,
+            repeat: -1});
+
+        this.anims.create({
+            key: 'boss-idle',
+            frames: [
+                {key:'idleboss-1'},
+                {key:'idleboss-2'},
+                {key:'idleboss-3'},
+                {key:'idleboss-4'},
+                {key:'idleboss-5'},
             ],
             frameRate: 15,
             repeat: -1});
@@ -422,7 +443,7 @@ class scene extends Phaser.Scene {
                 } else {
                     this.attack2.x = boss.x;
                     this.attack2.y = boss.y;
-                boss.play('boss-atk2');
+                    boss.play('boss-atk2');
 
                 //this.attac2 = this.add.rectangle(this.boss.x, this.boss.y, 500, 40).setOrigin(0, 0)
             }
@@ -446,7 +467,7 @@ class scene extends Phaser.Scene {
             console.log("en avant");
             boss.setVelocityX(-100);
             boss.setTexture('boss');
-            //ici mettre idle de bossu
+            boss.play('boss-idle');
         }
     }
 
