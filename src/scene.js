@@ -356,9 +356,9 @@ class scene extends Phaser.Scene {
         this.persAtmoreel.scrollFactorX=0.99;
         this.persAtmoreel.scrollFactorY=0.99;
         this.persAtmoalt.scrollFactorX=0.99;
-        this.p1Alt.scrollFactorX=0.99;
-        /**this.p1reel.scrollFactorX=0.99;
-        this.persAtmoalt.scrollFactorY=0.99;*/
+        //this.p1Alt.scrollFactorX=0.99;
+        //this.p1reel.scrollFactorX=0.99;
+        this.persAtmoalt.scrollFactorY=0.99;
         this.plan2alt.scrollFactorX=0.99;
         this.plan2alt.scrollFactorY=0.99;
         this.plan2reel.scrollFactorX=0.99;
