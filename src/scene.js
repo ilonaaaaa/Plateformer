@@ -19,20 +19,23 @@ class scene extends Phaser.Scene {
         this.load.image("boss", "assets/images/antagoniste.png");
         this.load.image("plantus", "assets/images/plantus.png");
         this.load.image("collid", "assets/images/CASSTOU.png");
+        this.load.image("collidindic", "assets/images/CASSTOUOE.png");
         this.load.spritesheet('Atk','assets/anim/nino/AtkSheet.png',{frameWidth: 203, frameHeight: 224});
         this.load.spritesheet('run','assets/anim/nino/run.png',{frameWidth: 182, frameHeight: 224});
         this.load.spritesheet('idle','assets/anim/nino/aie.png',{frameWidth: 200, frameHeight: 224});
         this.load.spritesheet('jump','assets/anim/nino/jump.png',{frameWidth: 182, frameHeight: 224});
+        this.load.spritesheet('bIdle','assets/anim/boss/bIdle.png',{frameWidth: 302, frameHeight: 528});
+        this.load.spritesheet('bAtk1','assets/anim/boss/bAtk1.png',{frameWidth: 650, frameHeight: 528});
+        this.load.spritesheet('bAtk2','assets/anim/boss/bAtk2.png',{frameWidth: 650, frameHeight: 528});
 
-        for (let m=1;m<=22;m++){
-            this.load.image('boss-'+m,'assets/anim/boss/atk1/boss_0'+m+'.png')
-        }
-        for (let m=1;m<=20;m++){
-            this.load.image('boss--'+m,'assets/anim/boss/atk2/bossatk2_'+m+'.png')
-        }
-        for (let m=1;m<=5;m++){
-            this.load.image('idleboss-'+m,'assets/anim/boss/idle/idle_'+m+'.png')
-        }
+
+        this.load.image('bossBase','assets/anim/boss/Atk1bas.png')
+
+
+        this.load.image('boss2Base','assets/anim/boss/Atk2bas.png')
+
+        this.load.image('idlebossBase','assets/anim/boss/IdlBas.png')
+
         for (let m=1;m<=11;m++){
             this.load.image('plante-'+m,'assets/anim/plante/plantus_'+m+'.png')
         }
@@ -74,21 +77,17 @@ class scene extends Phaser.Scene {
         this.alt = this.map.createLayer('alt', this.tileset, 0, 0).setVisible(false);
         this.solalt = this.map.createLayer('sol alt', this.tileset, 0, 0).setVisible(false);
 
-        this.boss = this.physics.add.sprite(12416,5568, 'boss').setOrigin(0, 0);
-        this.boss.setDisplaySize(64*5,64*10);
-        this.boss.setBodySize(64*3,64*10);
+        this.boss = this.physics.add.sprite(12416,5568, 'idlebossBase').setOrigin(0, 0);
         this.boss.body.setAllowGravity(false);
         this.boss.setImmovable(true);
 
-        this.attack1 = this.physics.add.sprite(50000,50000, 'grdgg').setOrigin(0, 0);
-        this.attack1.setVisible(false);
-        this.attack1.setDisplaySize(64*5,64*10);
+        this.attack1 = this.physics.add.sprite(50000,50000, 'bossBase').setOrigin(0, 0);
+        this.attack1.setVisible(true);
         this.attack1.body.setAllowGravity(false);
         this.attack1.setImmovable(true);
 
-        this.attack2 = this.physics.add.sprite(50000,50000, 'grdgg').setOrigin(0, 0);
-        this.attack2.setVisible(false);
-        this.attack2.setDisplaySize(64*5,64*10);
+        this.attack2 = this.physics.add.sprite(50000,50000, 'boss2Base').setOrigin(0, 0);
+        this.attack2.setVisible(true);
         this.attack2.body.setAllowGravity(false);
         this.attack2.setImmovable(true);
 
@@ -279,73 +278,34 @@ class scene extends Phaser.Scene {
         //animation pour les attaques du boss
         this.anims.create({
             key: 'boss-atk',
-            frames: [
-                {key:'boss-1'},
-                {key:'boss-2'},
-                {key:'boss-3'},
-                {key:'boss-4'},
-                {key:'boss-5'},
-                {key:'boss-6'},
-                {key:'boss-7'},
-                {key:'boss-8'},
-                {key:'boss-9'},
-                {key:'boss-10'},
-                {key:'boss-11'},
-                {key:'boss-12'},
-                {key:'boss-13'},
-                {key:'boss-14'},
-                {key:'boss-15'},
-                {key:'boss-16'},
-                {key:'boss-17'},
-                {key:'boss-18'},
-                {key:'boss-19'},
-                {key:'boss-20'},
-                {key:'boss-21'},
-                {key:'boss-22'},
-            ],
+            frames: this.anims.generateFrameNames('bAtk1', {
+                start: 0,
+                end: 21,
+            }),
             frameRate: 16,
-            repeat: -1});
+            repeat: -1
+        });
 
         this.anims.create({
             key: 'boss-atk2',
-            frames: [
-                {key:'boss--1'},
-                {key:'boss--2'},
-                {key:'boss--3'},
-                {key:'boss--4'},
-                {key:'boss--5'},
-                {key:'boss--6'},
-                {key:'boss--7'},
-                {key:'boss--8'},
-                {key:'boss--9'},
-                {key:'boss--10'},
-                {key:'boss--11'},
-                {key:'boss--12'},
-                {key:'boss--13'},
-                {key:'boss--14'},
-                {key:'boss--15'},
-                {key:'boss--16'},
-                {key:'boss--17'},
-                {key:'boss--18'},
-                {key:'boss--19'},
-                {key:'boss--20'},
-            ],
+            frames: this.anims.generateFrameNames('bAtk2', {
+                start: 0,
+                end: 19,
+            }),
             frameRate: 16,
-            repeat: -1});
+            repeat: -1
+        });
 
         this.anims.create({
             key: 'boss-idle',
-            frames: [
-                {key:'idleboss-1'},
-                {key:'idleboss-2'},
-                {key:'idleboss-3'},
-                {key:'idleboss-4'},
-                {key:'idleboss-5'},
-            ],
+            frames: this.anims.generateFrameNames('bIdle', {
+                start: 0,
+                end: 4,
+            }),
             frameRate: 15,
-            repeat: -1});
-
-
+            repeat: -1
+        });
+        this.boss.play('boss-idle');
 
         //création des checkpoints
         this.saves = this.physics.add.group({
@@ -426,51 +386,6 @@ class scene extends Phaser.Scene {
         }
     }
 
-
-    //toutes les interactions du boss
-    Bossattack(boss,player){
-        this.dist = Phaser.Math.Distance.BetweenPoints(player, boss);
-        if(this.dist <600) {
-            console.log("oui oui");
-            if (this.checkatk === true) {
-                let randatk = Phaser.Math.Between(1, 2)
-                if (randatk === 1) {
-
-                    this.attack1.x = boss.x;
-                    this.attack1.y = boss.y;
-                    boss.play('boss-atk');
-
-                } else {
-                    this.attack2.x = boss.x;
-                    this.attack2.y = boss.y;
-                    boss.play('boss-atk2');
-
-                //this.attac2 = this.add.rectangle(this.boss.x, this.boss.y, 500, 40).setOrigin(0, 0)
-            }
-            this.Reset = this.time.addEvent({
-                    delay: 25000,
-                    callback: ()=>{
-
-                    },
-                    loop: false,
-                })
-                this.checkatk = false
-        }
-            boss.setVelocityX(0);
-        }else{
-            this.attack1.x = -9999
-            this.attack1.y = -9999
-
-            this.attack2.x = -9999
-            this.attack2.y = -9999
-            this.checkatk = true
-            console.log("en avant");
-            boss.setVelocityX(-100);
-            boss.setTexture('boss');
-            boss.play('boss-idle');
-        }
-    }
-
     //mort du boss
     BossDed(){
         let me = this;
@@ -484,6 +399,54 @@ class scene extends Phaser.Scene {
         }
     }
 
+    //toutes les interactions du boss
+    Bossattack(boss,player){
+        this.dist = Phaser.Math.Distance.BetweenPoints(player, boss);
+        if(this.bossLife >>0){if(this.dist <600) {
+            console.log("oui oui");
+            if (this.checkatk === true) {
+                let randatk = Phaser.Math.Between(1, 2)
+                if (randatk === 1) {
+
+                    this.attack1.x = boss.x-(boss.width/2);
+                    this.attack1.y = boss.y;
+                    this.attack1.play('boss-atk');
+                    boss.setVisible(false);
+
+                } else {
+                    this.attack2.x = boss.x-(boss.width/2);
+                    this.attack2.y = boss.y;
+                    this.attack2.play('boss-atk2');
+                    boss.setVisible(false);
+
+                    //this.attac2 = this.add.rectangle(this.boss.x, this.boss.y, 500, 40).setOrigin(0, 0)
+                }
+                this.Reset = this.time.addEvent({
+                    delay: 25000,
+                    callback: ()=>{
+
+                    },
+                    loop: false,
+                })
+                this.checkatk = false
+            }
+            boss.setVelocityX(0);
+        }else{
+            this.attack1.x = -9999
+            this.attack1.y = -9999
+
+            this.attack2.x = -9999
+            this.attack2.y = -9999
+            this.checkatk = true
+            console.log("en avant");
+            boss.setVelocityX(-100);
+            boss.setVisible(true);
+        }}
+
+    }
+
+
+
 
 
     //changement de monde
@@ -496,7 +459,9 @@ class scene extends Phaser.Scene {
             this.NextSprite.body.enable = false;
             this.plan1alt.visible = false;
             this.alt.visible = false;
-            //this.mur.setTexture('murreel');
+            for(let i = 0;i < this.murs.getChildren().length; i++){
+                this.murs.getChildren()[i].setTexture('collidindic');
+            }
             this.reel.visible = true;
             this.solalt.visible = false;
             this.persAtmoalt.visible=false;
@@ -519,7 +484,9 @@ class scene extends Phaser.Scene {
             this.NextSprite.body.enable = true;
             this.plan1alt.visible = true;
             this.alt.visible = true;
-            //this.mur.setTexture('muralt');
+            for(let i = 0;i < this.murs.getChildren().length; i++){
+                this.murs.getChildren()[i].setTexture('collid');
+            }
             this.reel.visible = false;
             this.solalt.visible = true;
             this.persAtmoalt.visible=true;
