@@ -457,7 +457,7 @@ class scene extends Phaser.Scene {
             this.fragments.setAlpha(0.5);
             this.Next.setAlpha(0.5);
             this.NextSprite.body.enable = false;
-            this.plan1alt.visible = false;
+            //this.plan1alt.visible = false;
             this.alt.visible = false;
             for(let i = 0;i < this.murs.getChildren().length; i++){
                 this.murs.getChildren()[i].setTexture('collidindic');
@@ -484,7 +484,7 @@ class scene extends Phaser.Scene {
             this.fragments.setAlpha(1);
             this.Next.setAlpha(1);
             this.NextSprite.body.enable = true;
-            this.plan1alt.visible = true;
+            //this.plan1alt.visible = true;
             this.alt.visible = true;
             for(let i = 0;i < this.murs.getChildren().length; i++){
                 this.murs.getChildren()[i].setTexture('collid');
