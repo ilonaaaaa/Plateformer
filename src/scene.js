@@ -466,8 +466,10 @@ class scene extends Phaser.Scene {
             this.solalt.visible = false;
             this.persAtmoalt.visible=false;
             this.plan2alt.visible=false;
+            this.plan2reel.visible=true;
             this.persAtmo2alt.visible=false;
             this.plan3alt.visible=false;
+            this.plan3reel.visible=true;
             this.bg2.visible = false;
             this.plateformes.getChildren().forEach(child=>{
                 child.body.enable=false;
@@ -491,8 +493,10 @@ class scene extends Phaser.Scene {
             this.solalt.visible = true;
             this.persAtmoalt.visible=true;
             this.plan2alt.visible=true;
+            this.plan2reel.visible=false;
             this.persAtmo2alt.visible=true;
             this.plan3alt.visible=true;
+            this.plan3reel.visible=false;
             this.bg2.visible = true;
             this.plateformes.getChildren().forEach(child=>{
                 this.plateformes.getChildren().forEach(child=>{
