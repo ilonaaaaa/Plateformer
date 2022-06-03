@@ -69,6 +69,8 @@ class scene extends Phaser.Scene {
         this.plan3alt = this.map.createLayer('Plan3alt', this.tileset, 0, 0);
         this.persAtmo2reel = this.map.createLayer('PersAtmo2reel', this.tileset, 0, 0);
         this.persAtmo2alt = this.map.createLayer('PersAtmo2alt', this.tileset, 0, 0);
+        this.Arbresreel = this.map.createLayer('arbresFondreel', this.tileset, 0, 0);
+        this.Arbresalt = this.map.createLayer('arbresFondalt', this.tileset, 0, 0);
         this.plan2reel = this.map.createLayer('Plan2reel', this.tileset, 0, 0);
         this.plan2alt = this.map.createLayer('Plan2alt', this.tileset, 0, 0);
         this.persAtmoreel = this.map.createLayer('PersAtmoreel', this.tileset, 0, 0);
@@ -351,6 +353,10 @@ class scene extends Phaser.Scene {
         this.plan2alt.scrollFactorY=0.99;
         this.plan2reel.scrollFactorX=0.99;
         this.plan2reel.scrollFactorY=0.99;
+        this.Arbresreel.scrollFactorX=0.98;
+        this.Arbresreel.scrollFactorY=0.99;
+        this.Arbresalt.scrollFactorX=0.98;
+        this.Arbresalt.scrollFactorY=0.99;
         this.persAtmo2reel.scrollFactorX=0.98;
         this.persAtmo2reel.scrollFactorY=0.98;
         this.persAtmo2alt.scrollFactorX=0.98;
@@ -479,6 +485,8 @@ class scene extends Phaser.Scene {
             this.persAtmoalt.visible=false;
             this.plan2alt.visible=false;
             this.plan2reel.visible=true;
+            this.Arbresreel.visible = true;
+            this.Arbresalt.visible = false;
             this.persAtmo2alt.visible=false;
             this.plan3alt.visible=false;
             this.plan3reel.visible=true;
@@ -511,6 +519,8 @@ class scene extends Phaser.Scene {
             this.persAtmoalt.visible=true;
             this.plan2alt.visible=true;
             this.plan2reel.visible=false;
+            this.Arbresreel.visible = false;
+            this.Arbresalt.visible = true;
             this.persAtmo2alt.visible=true;
             this.plan3alt.visible=true;
             this.plan3reel.visible=false;
